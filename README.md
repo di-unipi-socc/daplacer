@@ -46,6 +46,10 @@ Routes = [((rVst, dataStorage), 24.0, [sciencesLectureHall, briggsHall, mannLab,
           ((interface, controller), 40, [mannLab, westEntry, parkingServices, lifeSciences]),  
           ((interface, rVid), 20, [mannLab, parkingServices, westEntry])]
 ```
+The previous prolog output is depicted in the following image:
+
+<kbd><img src="img/result.png" alt="output"/></kbd>
+
 
 ## Contributors <img src="https://cdn-icons-png.flaticon.com/512/33/33308.png" alt="output" width="20" height="20"/> 
 
