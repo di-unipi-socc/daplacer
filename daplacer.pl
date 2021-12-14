@@ -15,8 +15,8 @@ daplacer(App, NewP, NewRs) :-
   placement(SsToPlace, PrevAlloc, TmpBW, TmpRs, TmpP, NewAlloc, NewRs, NewP),
   retract(deployment(App, _, _, _)), assert(deployment(App, NewP, NewRs, NewAlloc)).
 daplacer(App, NewP, NewRs) :-
-  deployment(App,_,_,Alloc), application(App, Ss), Rs=[], P=[],
-  placement(Ss, Alloc, Rs, P, NewAlloc, NewRs, NewP),
+  deployment(App,_,_,Alloc), application(App, Ss), Rs=[], P=[], PrevBW=[],
+  placement(Ss, Alloc, PrevBW, Rs, P, NewAlloc, NewRs, NewP),
   retract(deployment(App,_,_)), assert(deployment(App, NewP, NewRs, NewAlloc)).
 
 reasoningStep([on(S,_)|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP) :-
