@@ -40,25 +40,24 @@ def change_nodes(nodes, prob):
 			name, sw, cpu, ram, hdd, sec, iot = parse(NODE, n)
 			ram = float(ram)
 			hdd = float(hdd)
-			new_ram = round(random.uniform(ram // 2, ram * 1.2), 2)
-			new_hdd = round(random.uniform(hdd // 2, hdd * 1.2), 2)
+			new_ram = round(random.uniform(1, ram * 1.1), 2)
+			new_hdd = round(random.uniform(1, hdd * 1.2), 2)
 			n = NODE.format(name, sw, cpu, new_ram, new_hdd, sec, iot)
-		# print("{} changed".format(name))
 		res.append(n)
 	return res
 
 
 def change_links(links, prob):
 	res = []
-	for l in links:
+	for ln in links:
 		if random.random() < prob:
-			n1, n2, lat, bw = parse(LINK, l)
+			n1, n2, lat, bw = parse(LINK, ln)
 			lat = float(lat)
 			bw = float(bw)
-			new_lat = round(random.uniform(5, lat * 1.5), 2)
-			new_bw = round(random.uniform(bw // 1.2, bw * 1.2), 2)
-			l = LINK.format(n1, n2, new_lat, new_bw)
-		res.append(l)
+			new_lat = round(random.uniform(lat//2, lat * 1.5), 2)
+			new_bw = round(random.uniform(1, bw * 1.1), 2)
+			ln = LINK.format(n1, n2, new_lat, new_bw)
+		res.append(ln)
 	return res
 
 
@@ -69,8 +68,8 @@ def change_infr(prob):
 	links = [i for i in infr if i.startswith("link(")]
 	for n in nodes:
 		infr.remove(n)
-	for l in links:
-		infr.remove(l)
+	for ln in links:
+		infr.remove(ln)
 	f_r.close()
 
 	new_nodes = change_nodes(nodes, prob)
@@ -89,7 +88,7 @@ def change_app(epoch):
 		eval("commit_{}()".format(commit_no))
 
 
-def main(epochs=10, prob=0.1):
+def main(epochs=600, prob=0.1):
 	mgr = Manager()
 	res_no_cr = mgr.list()
 	res_cr = []
@@ -143,4 +142,4 @@ def main(epochs=10, prob=0.1):
 
 
 if __name__ == '__main__':
-	main(epochs=10, prob=0.5)
+	main(prob=0.5)
