@@ -4,53 +4,49 @@
 :-set_prolog_flag(stack_limit, 16 000 000 000).
 :-set_prolog_flag(last_call_optimisation, true).
 
-dap(A,P,R,Infs,Time) :- 
-  statistics(inferences, InfA),
-        statistics(cputime, TimeA),
-          daplacer(A,P,R),
-        statistics(cputime, TimeB),
-  statistics(inferences, InfB),
-
-  Infs is InfB - InfA,
-  Time is TimeB - TimeA.
-
 daplacer(App, NewP, NewRs) :-
   \+ deployment(App, _, _, _), application(App, Ss), Alloc=([],[]), Rs=[], P=[], PrevBW=[],
   placement(Ss, Alloc, PrevBW, Rs, P, NewAlloc, NewRs, NewP),
   assert(deployment(App, NewP, NewRs, NewAlloc)).
+daplacer(App, NewP, NewRs) :-
+  deployment(App, PrevP, PrevRs, PrevAlloc), newServices(PrevP, NewSs),
+  once(reasoningStep(PrevP, PrevAlloc, PrevRs, SsToMove, TmpBW, TmpRs, TmpP)),
+  append(NewSs, SsToMove, SsToPlace),
+  placement(SsToPlace, PrevAlloc, TmpBW, TmpRs, TmpP, NewAlloc, NewRs, NewP),
+  retract(deployment(App, _, _, _)), assert(deployment(App, NewP, NewRs, NewAlloc)).
+daplacer(App, NewP, NewRs) :-
+  deployment(App,_,_,Alloc), application(App, Ss), Rs=[], P=[], PrevBW=[],
+  placement(Ss, Alloc, PrevBW, Rs, P, NewAlloc, NewRs, NewP),
+  retract(deployment(App,_,_,_)), assert(deployment(App, NewP, NewRs, NewAlloc)).
+
+reasoningStep([on(S,_)|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP) :-
+  reasoningStep(P, (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP),
+  \+ service(S, _, _, _, _).
+reasoningStep([on(S,N)|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, [on(S,N)|NewP]) :-
+  reasoningStep(P, (HW,BW), Rs, SsToMove, TmpBW, TmpRs, NewP),
+  nodeOK(S, N, NewP, HW), 
+  serviceRoutesOK(S, N, NewP, BW, Rs, TmpBW, Tmp2Routes, NewBW), 
+  append(TmpRs, Tmp2Routes, NewRs).
+reasoningStep([on(S,_)|P], (HW,BW), Rs, [S|SsToMove], NewBW, NewRs, NewP) :-
+  reasoningStep(P, (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP).
+reasoningStep([],_,_,[],[],[],[]).
+
+newServices(P, NewServices) :- findall(S, (service(S,_,_,_,_), \+ member(on(S,_), P)), NewServices).
 
 placement(Ss, (HW,BW), PrevBW, Rs, P, (NewHW,NewBW), NewRs, NewP) :-
-  findCompatibles(Ss, Compatibles), sort(1, @>=, Compatibles, SCs),
-  servicePlacement(SCs, HW, NewHW, P, NewP), 
-  findRoutes(Ss, NewP, BW, PrevBW, Rs, NewBW, NewRs).  
+  servicePlacement(Ss, HW, NewHW, P, NewP),
+  findRoutes(Ss, NewP, BW, PrevBW, Rs, NewBW, NewRs).
 
-findCompatibles([S|Ss], [(L,S,SCompatibles)|Rest]):-
-  findCompatibles(Ss, Rest),
-  findall((HWCaps, M), lightNodeOk(S, M, HWCaps), Compatibles),  
-  sort(1, @>=, Compatibles, SCompatibles),
-  length(SCompatibles,L).
-findCompatibles([],[]).
-
-lightNodeOk(S,N,HD) :-
-  service(S, SWReqs, HWReqs, DataIds, _),
-  node(N, SWCaps, HWCaps, SecCaps, _), HWCaps=(_, _,HD),
-  subset(SWReqs,SWCaps),
-  getSecReqs(DataIds, SecReqs), subset(SecReqs, SecCaps),
-  checkHW(HWReqs,HWCaps).
-
-checkHW((ReqCPU, ReqRAM, ReqHDD),(FeatCPU, FeatRAM, FeatHDD)) :-
-  FeatCPU >= ReqCPU,
-  FeatRAM >= ReqRAM,
-  FeatHDD >= ReqHDD.
-
-servicePlacement([(_,S,Cs)|Ss], HW, NewHW, P, NewP) :-
-  member((_,N),Cs), nodeOK(S,N,P,HW),
+servicePlacement([S|Ss], HW, NewHW, P, NewP) :-
+  nodeOK(S, N, P, HW),
   servicePlacement(Ss, HW, NewHW, [on(S,N)|P], NewP).
 servicePlacement([], _, NewHW, P, P) :- hwAllocation(P, NewHW).
 
 nodeOK(S, N, P, AllocHW):-
-  service(S, _, HWReqs, _, _),
-  node(N, _, HWCaps, _, _),
+  service(S, SWReqs, HWReqs, DataIds, _),
+  node(N, SWCaps, HWCaps, SecCaps, _),
+  subset(SWReqs, SWCaps),
+  getSecReqs(DataIds, SecReqs), subset(SecReqs, SecCaps),
   hwOK(HWReqs, HWCaps, N, P, AllocHW).
 
 hwOK(HWReqs, HWCaps, N, P, AllocHW) :-
@@ -97,6 +93,23 @@ route((N1,N2), ReqLat, ReqBW, OldLat, AllocBW, PrevBW, Route, NewAllocBW, NewRou
   bwOK(N1, X, ReqBW, FeatBW, AllocBW, PrevBW, TAllocBW),
   route((X,N2), ReqLat, ReqBW, NewLat, AllocBW, TAllocBW, [N1|Route], NewAllocBW, NewRoute).
 route((N,N), _, _, _, _, AllocBW, Route, AllocBW, [N|Route]).
+
+serviceRoutesOK(S, N, P, AllocBW, Routes, OkBW, NewRoutes, NewBW) :-
+  findall((S1S2, Lat, BW), relevantS2S(S1S2, _, Lat, BW, S, N, P),N2Ns),
+  routesOK(N2Ns, AllocBW, Routes, OkBW, NewRoutes, NewBW).
+
+routesOK([(S1S2,ReqLat, ReqBW)|Ps], AllocBW, Routes, OkBW, [(S1S2,ReqBW,R)|NewRoutes], NewBW) :-
+  member((S1S2,_,R), Routes),
+  checkPath(R, ReqLat, 0, ReqBW, AllocBW, OkBW, TmpBW),
+  once(routesOK(Ps, AllocBW, Routes, TmpBW, NewRoutes, NewBW)).
+routesOK([], _, _, AllocBW, [], AllocBW).
+
+checkPath([N1,N2|Ns], ReqLat, Lat, ReqBW, AllocBW, PrevAllocBW, NewAllocBW) :-
+  link(N1, N2, FeatLat, FeatBW),
+  latencyOK(ReqLat, FeatLat, Lat, TmpLat),
+  bwOK(N1, N2, ReqBW, FeatBW, AllocBW, PrevAllocBW, TmpAllocBW),
+  checkPath([N2|Ns], ReqLat, TmpLat, ReqBW, AllocBW, TmpAllocBW, NewAllocBW).
+checkPath([_], _, _, _, _, NewAllocBW, NewAllocBW).
 
 relevantS2S((S,S2), (N,N2), Lat, ReqBW, S, N, P) :-
   e2e(S,S2,Lat,DataIds),

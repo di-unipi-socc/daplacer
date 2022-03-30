@@ -1,17 +1,28 @@
+import sys
+import os
+import shutil
 import random
 from multiprocessing import Process, Manager
 
 import pandas as pd
 from parse import *
 from pyswip import Prolog
+from commits import *
 
 APP_NAME = "museuMonitor"
 DAP = "dap(A,P,R,Infs,Time).".format(APP_NAME)
 DAP_CR = "dapCR(A,NP,NR,Infs,Time).".format(APP_NAME)
 
 INFR_FILE = "code/infra.pl"
+APP_FILE = "code/app.pl"
 NODE = "node({}, {}, ({}, {}, {}), {}, {}).\n"
 LINK = "link({}, {}, {}, {}).\n"
+
+HW_CAPS = {}
+QOS_CAPS = {}
+
+FAIL_PROB = 0.02
+SEED = 33
 
 
 def my_query(s, p):
@@ -29,19 +40,39 @@ def no_cr_process(res):
 		res.append({"Infs": no_cr["Infs"], "Time": no_cr["Time"]})
 
 	except StopIteration:
-		print("fault")
+		print(" - fault")
 		res.append({})
+
+
+def fail():
+	return random.random() < FAIL_PROB
+
+
+def save_caps():
+	global HW_CAPS, QOS_CAPS
+	f_r = open(INFR_FILE, "r")
+	infr = f_r.readlines()
+	nodes = [i for i in infr if i.startswith("node(")]
+	links = [i for i in infr if i.startswith("link(")]
+
+	for n in nodes:
+		name, _, _, ram, hdd, _, _ = parse(NODE, n)
+		HW_CAPS[name] = {'ram': float(ram), 'hdd': float(hdd)}
+
+	for ln in links:
+		n1, n2, lat, bw = parse(LINK, ln)
+		QOS_CAPS[(n1, n2)] = {'lat': float(lat), 'bw': float(bw)}
 
 
 def change_nodes(nodes, prob):
 	res = []
 	for n in nodes:
 		if random.random() < prob:
-			name, sw, cpu, ram, hdd, sec, iot = parse(NODE, n)
-			ram = float(ram)
-			hdd = float(hdd)
-			new_ram = round(random.uniform(1, ram * 1.1), 2)
-			new_hdd = round(random.uniform(1, hdd * 1.2), 2)
+			name, sw, cpu, _, _, sec, iot = parse(NODE, n)
+			ram = HW_CAPS[name]['ram']
+			hdd = HW_CAPS[name]['hdd']
+			new_ram = round(random.uniform(ram//10, ram * 1.1), 2) if not fail() else 0
+			new_hdd = round(random.uniform(hdd//10, hdd * 1.2), 2) if not fail() else 0
 			n = NODE.format(name, sw, cpu, new_ram, new_hdd, sec, iot)
 		res.append(n)
 	return res
@@ -51,11 +82,11 @@ def change_links(links, prob):
 	res = []
 	for ln in links:
 		if random.random() < prob:
-			n1, n2, lat, bw = parse(LINK, ln)
-			lat = float(lat)
-			bw = float(bw)
-			new_lat = round(random.uniform(lat//2, lat * 1.5), 2)
-			new_bw = round(random.uniform(1, bw * 1.1), 2)
+			n1, n2, _, _ = parse(LINK, ln)
+			lat = QOS_CAPS[(n1, n2)]['lat']
+			bw = QOS_CAPS[(n1, n2)]['bw']
+			new_lat = round(random.uniform(lat // 2, lat * 1.5), 2) if not fail() else 1000
+			new_bw = round(random.uniform(bw // 2, bw * 1.1), 2) if not fail() else 0
 			ln = LINK.format(n1, n2, new_lat, new_bw)
 		res.append(ln)
 	return res
@@ -83,21 +114,38 @@ def change_infr(prob):
 
 
 def change_app(epoch):
-	if epoch % 60 == 0:
-		commit_no = epoch // 60
+	if epoch % 100 == 0:
+		commit_no = epoch // 100
 		eval("commit_{}()".format(commit_no))
 
 
-def main(epochs=600, prob=0.1):
+def get_data(n):
+	if os.path.exists(APP_FILE):
+		os.remove(APP_FILE)
+	if os.path.exists(INFR_FILE):
+		os.remove(INFR_FILE)
+
+	shutil.copy("infra/app.pl", APP_FILE)
+	shutil.copy(f"infra/infra_{n}.pl", INFR_FILE)
+
+
+def main(n=16, prob=0.1, epochs=600):
 	mgr = Manager()
 	res_no_cr = mgr.list()
 	res_cr = []
+
+	# preliminary operation
+	random.seed(SEED)
+	get_data(n)
 
 	p_cr = Prolog()
 	p_cr.consult("code/dap2.pl")
 	i = 1
 
 	while i <= epochs:
+
+		if i == 1:
+			save_caps()
 		# NO CR PROCESS
 		process = Process(target=no_cr_process, args=(res_no_cr,))
 		process.start()
@@ -114,7 +162,7 @@ def main(epochs=600, prob=0.1):
 
 		sys.stdout.write("\r")
 		sys.stdout.flush()
-		sys.stdout.write("Done {}/{}".format(i + 1, epochs))
+		sys.stdout.write("Done {}/{}".format(i, epochs))
 		i += 1
 
 		change_app(i)
@@ -133,13 +181,18 @@ def main(epochs=600, prob=0.1):
 	avg_infs = df['Infs'].mean()
 	avg_infs_cr = df['InfsCR'].mean()
 
+	print("Done for {} prob\n".format(prob))
 	print("TIME: {:.6f} \t TIME_CR: {:.6f}".format(avg_time, avg_time_cr))
 	print("INFS: {} \t INFS_CR: {}".format(avg_infs, avg_infs_cr))
 
-	filename = "results_{}.csv".format(prob)
+	filename = "results_{}_{}.csv".format(n, prob)
 	df.index.name = "Epoch"
 	df.to_csv("csv/{}".format(filename))
 
 
 if __name__ == '__main__':
-	main(prob=0.5)
+	PROBS = [0.1, 0.2, 0.4, 0.5]
+	NODES = [16, 32, 64, 128, 256, 512]
+	for n in NODES:
+		for p in PROBS:	
+			main(n=n, prob=p, epochs=600)

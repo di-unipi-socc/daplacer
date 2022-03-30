@@ -1,10 +1,10 @@
 % application(AppId, [ServiceIds]).
 application(museuMonitor, [interface, controller, dataStorage]).
 
-% service(ServiceId, [SWReqs], [HWReqs], [DataIds]).
-service(interface, [ubuntu], (2.4, 4, 128), [videoStream]).
-service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream]).
-service(dataStorage, [mySQL, ubuntu], (5, 4, 512), [artStats, visitorStats]).
+% service(ServiceId, [SWReqs], [HWReqs], [DataIds], MigrationCost).
+service(interface, [ubuntu], (2.4, 4, 128), [videoStream], 5).
+service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream], 30).
+service(dataStorage, [mySQL, ubuntu], (5, 4, 512), [artStats, visitorStats], 100).
 
 % dataType(DataId, Size, [SecReqs]).
 dataType(artStats, 0.5, [encryption]).
