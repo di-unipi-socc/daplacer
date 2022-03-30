@@ -1,5 +1,5 @@
 # DA-Placer
-### _Data-aware service placement and routing in the Cloud-IoT continuum_
+### _Data-aware service placement and routing in the Cloud-IoT continuum_.
 
 DA-Placer is a tool for designing and proposing an eligible *placement* and a suitable *routing* strategy for a given service-oriented application within its *data* and requirements, over a given Cloud-IoT infrastructure. 
 
@@ -19,7 +19,7 @@ As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 l
 1. Download or clone this repo. Make sure you have the following prerequisites:
 
     - [`swipl`](https://www.swi-prolog.org/download/stable)
-    - [`python`](https://www.python.org/downloads/) > 3.8
+    - [`python`](https://www.python.org/downloads/) >= 3.6
 
 2. In the project folder, run the following command on terminal, to access the SWI-Prolog console:
     ```console 
