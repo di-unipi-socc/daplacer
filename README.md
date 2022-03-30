@@ -1,14 +1,18 @@
 # DA-Placer
 ### _Data-aware service placement and routing in the Cloud-IoT continuum_
 
-DA-Placer is a tool for designing and providing a placement strategy for a given application within its data and requirements, onto a given Cloud-IoT infrastructure.
+DA-Placer is a tool for designing and proposing an eligible *placement* and a suitable *routing* strategy for a given service-oriented application within its *data* and requirements, over a given Cloud-IoT infrastructure. 
+
+It exploits the _backtracking_ of the Prolog reasoner to entirely explore the search space of possible solutions, and a _continuous reasoning_ approach to speed-up the decision making process at runtime, after a first eligible solution has been found.
+
+As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 lines of code), which allows to have a high level of readability and maintainability.
 
 ## Files &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/149/149337.png" alt="files" width="20" height="20"/>
  - `model.pl` contains the way to describe the application and the infrastructure on which you want to attempt the placement and routing process.
 
  - `app.pl` and `infrastructure.pl` files contain an instance of the model.
 
- - `daplacer.pl` contains the main logic of the placer (&sime; 170 lines of code).
+ - `daplacer.pl` contains the main logic of the placer.
 
 ## How To &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/3208/3208615.png" alt="checklist" width="20" height="20"/> 
 
