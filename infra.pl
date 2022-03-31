@@ -24,11 +24,11 @@ node(lifeSciences, [python, mySQL], (3, 6, 256), [encryption, auth], []).
 node(sciencesLectureHall, [ubuntu, mySQL], (3, 6, 256), [encryption, auth], [vst38]).
 node(firePolice, [ubuntu, mySQL, python], (4, 8, 512), [encryption, auth], []).
 node(studentCenter, [ubuntu, mySQL, python], (4, 8, 512), [encryption, auth], [glass4]).
-node(isp, [ubuntu, mySQL, python], (5, 16, 600), [encryption, auth], []).
+node(isp, [ubuntu, mySQL], (5, 16, 600), [encryption, auth], []).
 node(cloud, [ubuntu, mySQL, python], (6, 32, 10000), [encryption, auth], []).
 
-link(isp, firePolice, 10, 1000).
-link(firePolice, isp, 10, 1000).
+link(isp, firePolice, 10, 80).
+link(firePolice, isp, 10, 80).
 link(isp, studentCenter, 10, 1000).
 link(studentCenter, isp, 10, 1000).
 

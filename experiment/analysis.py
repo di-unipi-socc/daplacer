@@ -3,7 +3,6 @@ import pandas as pd
 
 FILENAME = "csv/results.csv"
 
-
 def speedups():
 	df = pd.read_csv(FILENAME)
 
@@ -27,7 +26,8 @@ def main(field="Infs"):
 	plt.figure()
 	plt.xticks(x, sizes)
 	plt.xlabel("Infrastructure Size")
-	plt.ylabel(field)
+	ylabel = "Inferences" if field.startswith("Infs") else "Time"
+	plt.ylabel(ylabel)
 	for r in rates:
 		y = df.loc[df["Rate"] == r][field]
 		lbl = str(r*100) + "%"
