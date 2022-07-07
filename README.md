@@ -36,6 +36,8 @@ As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 l
 
 4. Repeat _step 2_, and you'll obtain as output a new placement for new and suffering services.
 
+    **N.B.** _Do not terminate the already started `swipl` process, or you will lose the knoweldge base that has been built so far!_
+
 ## Output Example &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/570/570162.png" alt="output" width="20" height="20"/> 
 
 ```prolog
