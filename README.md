@@ -1,7 +1,29 @@
-# DA-Placer
+<img src="https://github.com/di-unipi-socc/daplacer/blob/main/img/daplacer-logo.png" width="300">
+
 ### _Data-aware service placement and routing in the Cloud-IoT continuum_.
 
-DA-Placer is a tool for designing and proposing an eligible *placement* and a suitable *routing* strategy for a given service-oriented application within its *data* and requirements, over a given Cloud-IoT infrastructure. 
+DA-Placer methodology is described and assessed in:
+
+> [Jacopo Massa](https://pages.di.unipi.it/massa), [Stefano Forti](https://pages.di.unipi.it/forti), [Antonio Brogi](https://pages.di.unipi.it/brogi)<br>
+> [**Data-Aware Service Placement in the Cloud-IoT Continuum**](https://doi.org/10.1007/978-3-031-18304-1_8), <br>	
+> Communications in Computer and Information Science, vol 1603 @ [SummerSOC](https://www.summersoc.eu), 2022.
+
+If you wish to reuse source code in this repo, or mention our work, please consider citing the above mentioned article:
+
+```bibtex
+@inproceedings{massa2022daplacer,
+ title        = {{Data-Aware Service Placement in the Cloud-IoT Continuum}},
+ author       = {Massa, Jacopo and Forti, Stefano and Brogi, Antonio},
+ year         = 2022,
+ booktitle    = {Service-Oriented Computing},
+ publisher    = {Springer International Publishing},
+ pages        = {139--158}
+}
+```
+
+<hr>
+
+**DA-Placer** is a tool for designing and proposing an eligible *placement* and a suitable *routing* strategy for a given service-oriented application within its *data* and requirements, over a given Cloud-IoT infrastructure. 
 
 It exploits the _backtracking_ of the Prolog reasoner to entirely explore the search space of possible solutions, and a _continuous reasoning_ approach to speed-up the decision making process at runtime, after a first eligible solution has been found.
 
