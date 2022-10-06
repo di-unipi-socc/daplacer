@@ -17,7 +17,7 @@ If you wish to reuse source code in this repo, or mention our work, please consi
   year         = 2022,
   booktitle    = {Service-Oriented Computing},
   publisher    = {Springer International Publishing},
-  editor       = {Barzen, Johanna and Leymann, Frank and Dustdar, Schahram}
+  editor       = {Barzen, Johanna and Leymann, Frank and Dustdar, Schahram},
   pages        = {139--158}
 }
 
