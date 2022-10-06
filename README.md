@@ -12,13 +12,15 @@ If you wish to reuse source code in this repo, or mention our work, please consi
 
 ```bibtex
 @inproceedings{massa2022daplacer,
- title        = {{Data-Aware Service Placement in the Cloud-IoT Continuum}},
- author       = {Massa, Jacopo and Forti, Stefano and Brogi, Antonio},
- year         = 2022,
- booktitle    = {Service-Oriented Computing},
- publisher    = {Springer International Publishing},
- pages        = {139--158}
+  title        = {{Data-Aware Service Placement in the Cloud-IoT Continuum}},
+  author       = {Massa, Jacopo and Forti, Stefano and Brogi, Antonio},
+  year         = 2022,
+  booktitle    = {Service-Oriented Computing},
+  publisher    = {Springer International Publishing},
+  editor       = {Barzen, Johanna and Leymann, Frank and Dustdar, Schahram}
+  pages        = {139--158}
 }
+
 ```
 
 <hr>
