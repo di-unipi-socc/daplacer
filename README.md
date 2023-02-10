@@ -1,4 +1,8 @@
-<img src="https://github.com/di-unipi-socc/daplacer/blob/main/img/daplacer-logo.png" width="300">
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="img/daplacer-logo-night.png">
+    <img src="img/daplacer-logo.png" width="300"/>
+</picture>
+
 
 ### _Data-aware service placement and routing in the Cloud-IoT continuum_.
 
