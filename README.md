@@ -35,14 +35,16 @@ It exploits the _backtracking_ of the Prolog reasoner to entirely explore the se
 
 As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 lines of code), which allows to have a high level of readability and maintainability.
 
-## Files &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/149/149337.png" alt="files" width="20" height="20"/>
+## Files &nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/512/2822/2822755.png"><img width="20" height="20" alt="files" src="https://cdn-icons-png.flaticon.com/512/2822/2822584.png"/>
+</picture>
  - `model.pl` contains the way to describe the application and the infrastructure on which you want to attempt the placement and routing process.
 
  - `app.pl` and `infrastructure.pl` files contain an instance of the model.
 
  - `daplacer.pl` contains the main logic of the placer.
 
-## How To &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/3208/3208615.png" alt="checklist" width="20" height="20"/> 
+ ## How To &nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/512/2666/2666505.png"><img width="20" height="20" alt="files" src="https://cdn-icons-png.flaticon.com/512/2666/2666469.png">
+</picture>
 
 1. Download or clone this repo. Make sure you have the following prerequisites:
 
@@ -66,7 +68,7 @@ As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 l
 
     **N.B.** _Do not terminate the already started `swipl` process, or you will lose the knoweldge base that has been built so far!_
 
-## Output Example &nbsp;<img src="https://cdn-icons-png.flaticon.com/512/570/570162.png" alt="output" width="20" height="20"/> 
+## Output Example &nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/512/3488/3488340.png"><img width="20" height="20" alt="files" src="https://cdn-icons-png.flaticon.com/512/3488/3488804.png"></picture>
 
 ```prolog
 % on(Service, Node)
@@ -90,7 +92,7 @@ The previous prolog output is depicted in the following image:
 <kbd><img src="img/result.png" alt="output"/></kbd>
 
 
-## Contributors <img src="https://cdn-icons-png.flaticon.com/512/33/33308.png" alt="output" width="20" height="20"/> 
+## Contributors &nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn-icons-png.flaticon.com/512/3369/3369157.png"><img width="20" height="20" alt="files" src="https://cdn-icons-png.flaticon.com/512/3369/3369137.png"></picture>
 
  - [Jacopo Massa](http://pages.di.unipi.it/massa) (corresponding author)
  - [Stefano Forti](http://pages.di.unipi.it/forti)
