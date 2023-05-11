@@ -39,7 +39,7 @@ As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 l
 </picture>
  - `model.pl` contains the way to describe the application and the infrastructure on which you want to attempt the placement and routing process.
 
- - `app.pl` and `infrastructure.pl` files contain an instance of the model.
+ - `data/app.pl` and `data/infra.pl` files contain an instance of the model.
 
  - `daplacer.pl` contains the main logic of the placer.
 
@@ -60,9 +60,9 @@ As it is written in Prolog, it is very *declarative* and *concise* (&sime; 170 l
     ```prolog
     :- daplacer(museuMonitor, Placement, Routes).
     ```
-    The output will be a first placement and routing for the application described in `app.pl` (named _museuMonitor_), onto the infrastructure described in `infrastructure.pl`.
+    The output will be a first placement and routing for the application described in `app.pl` (named _museuMonitor_), onto the infrastructure described in `infra.pl`.
 
-4. To try the _continuous reasoning_, open `infrastructure.pl` file and change some links or nodes involved in the first placement, or change `app.pl` description, adding new services, data types or end-to-end interactions.
+4. To try the _continuous reasoning_, open `infra.pl` file and change some links or nodes involved in the first placement, or change `app.pl` description, adding new services, data types or end-to-end interactions.
 
 4. Repeat _step 2_, and you'll obtain as output a new placement for new and suffering services.
 
