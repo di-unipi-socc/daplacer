@@ -27,6 +27,32 @@ node(studentCenter, [ubuntu, mySQL, python], (4, 8, 512), [encryption, auth], [g
 node(isp, [ubuntu, mySQL], (5, 16, 600), [encryption, auth], []).
 node(cloud, [ubuntu, mySQL, python], (6, 32, 10000), [encryption, auth], []).
 
+nodeCost(parkingServices, 2.0).
+nodeCost(westEntry, 1.5).
+nodeCost(kleiberHall, 1.8).
+nodeCost(hoaglandAnnex, 2.2).
+nodeCost(briggsHall, 2.5).
+nodeCost(mannLab, 2.8).
+nodeCost(lifeSciences, 3.0).
+nodeCost(sciencesLectureHall, 3.2).
+nodeCost(firePolice, 3.5).
+nodeCost(studentCenter, 3.8).
+nodeCost(isp, 5.0).
+nodeCost(cloud, 8.0).
+
+nodeCI(parkingServices, 0.10).
+nodeCI(westEntry, 0.08).
+nodeCI(kleiberHall, 0.09).
+nodeCI(hoaglandAnnex, 0.12).
+nodeCI(briggsHall, 0.13).
+nodeCI(mannLab, 0.15).
+nodeCI(lifeSciences, 0.17).
+nodeCI(sciencesLectureHall, 0.18).
+nodeCI(firePolice, 0.20).
+nodeCI(studentCenter, 0.22).
+nodeCI(isp, 0.30).
+nodeCI(cloud, 0.50).
+
 link(isp, firePolice, 10, 80).
 link(firePolice, isp, 10, 80).
 link(isp, studentCenter, 10, 1000).

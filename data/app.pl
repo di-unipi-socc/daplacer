@@ -6,6 +6,14 @@ service(interface, [ubuntu], (2.4, 4, 128), [videoStream], 5).
 service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream], 30).
 service(dataStorage, [mySQL, ubuntu], (5, 4, 512), [artStats, visitorStats], 100).
 
+serviceCost(interface, 3.0).
+serviceCost(controller, 5.0).
+serviceCost(dataStorage, 6.0).
+
+serviceCI(interface, 0.15).
+serviceCI(controller, 0.18).
+serviceCI(dataStorage, 0.20).
+
 % dataType(DataId, Size, [SecReqs]).
 dataType(artStats, 0.5, [encryption]).
 dataType(visitorStats, 0.4, [auth, encryption]).

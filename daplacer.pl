@@ -22,21 +22,21 @@ daplacer(App, NewP, NewRs) :-
   placement(Ss, Alloc, PrevBW, Rs, P, NewAlloc, NewRs, NewP),
   retract(deployment(App,_,_)), assert(deployment(App, NewP, NewRs, NewAlloc)).
 
-reasoningStep([on(S,_)|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP) :-
+reasoningStep([on(S,(_,_))|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP) :-
   reasoningStep(P, (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP),
   \+ service(S, _, _, _, _).
-reasoningStep([on(S,N)|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, [on(S,N)|NewP]) :-
+reasoningStep([on(S,(N,Mode))|P], (HW,BW), Rs, SsToMove, NewBW, NewRs, [on(S,(N, Mode))|NewP]) :-
   reasoningStep(P, (HW,BW), Rs, SsToMove, TmpBW, TmpRs, NewP),
   nodeOK(S, N, NewP, HW), 
   serviceRoutesOK(S, N, NewP, BW, Rs, TmpBW, Tmp2Routes, NewBW), 
   append(TmpRs, Tmp2Routes, NewRs).
-reasoningStep([on(S,_)|P], (HW,BW), Rs, [S|SsToMove], NewBW, NewRs, NewP) :-
+reasoningStep([on(S,(_,_))|P], (HW,BW), Rs, [S|SsToMove], NewBW, NewRs, NewP) :-
   reasoningStep(P, (HW,BW), Rs, SsToMove, NewBW, NewRs, NewP).
 reasoningStep([],_,_,[],[],[],[]).
 
-newServices(P, NewServices) :- findall(S, (service(S,_,_,_,_), \+ member(on(S,_), P)), NewServices).
+newServices(P, NewServices) :- findall(S, (service(S,_,_,_,_), \+ member(on(S,(_,_)), P)), NewServices).
 
 sortByMigrationCost(P, SP) :-
-  findall((C,(S,N)), (member(on(S,N), P), service(S,_,_,_,C)), Costs),
+  findall((C,on(S,(N,Mode))), (member(on(S,(N,Mode)), P), service(S,_,_,_,C)), Costs),
   sort(1, @>=, Costs, SCosts),
-  findall(on(S,N), member((_,(S,N)), SCosts), SP).
+  findall(on(S,(N,Mode)), member((_,on(S,(N,Mode))), SCosts), SP).
