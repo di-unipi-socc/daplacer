@@ -1,10 +1,22 @@
-:- ['src/placer.pl', 'src/routes.pl'].
-:- ['data/infra.pl','data/app.pl'].
+:- ['placer.pl', 'routes.pl'].
+% :- ['../../applications/prolog/museuMonitor.pl'].
+% :- ['../../infrastructures/BA/infr32-42.pl'].
+% :-['../../infrastructures/UC.pl'].
 :- dynamic deployment/4.
 
 :-set_prolog_flag(answer_write_options,[max_depth(0)]).
-:-set_prolog_flag(stack_limit, 16 000 000 000).
+:-set_prolog_flag(stack_limit, 128 000 000 000).
 :-set_prolog_flag(last_call_optimisation, true).
+
+dap(A,P,R,Infs,Time) :-
+  statistics(inferences, InfA),
+        statistics(cputime, TimeA),
+          daplacer(A,P,R),
+        statistics(cputime, TimeB),
+  statistics(inferences, InfB),
+
+  Infs is InfB - InfA - 7,
+  Time is TimeB - TimeA.
 
 daplacer(App, NewP, NewRs) :-
   \+ deployment(App, _, _, _), application(App, Ss), Alloc=([],[]), Rs=[], P=[], PrevBW=[],

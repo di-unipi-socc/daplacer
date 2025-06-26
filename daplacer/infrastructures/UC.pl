@@ -1,4 +1,4 @@
-bwTh(20).
+bwTh(5).
 
 dataBinding(interface, rCam, cam20).
 dataBinding(interface, rVid, video3).
@@ -37,21 +37,21 @@ nodeCost(lifeSciences, 3.0).
 nodeCost(sciencesLectureHall, 3.2).
 nodeCost(firePolice, 3.5).
 nodeCost(studentCenter, 3.8).
-nodeCost(isp, 5.0).
-nodeCost(cloud, 8.0).
+nodeCost(isp, 4.0).
+nodeCost(cloud, 6.0).
 
-nodeCI(parkingServices, 0.10).
-nodeCI(westEntry, 0.08).
-nodeCI(kleiberHall, 0.09).
-nodeCI(hoaglandAnnex, 0.12).
-nodeCI(briggsHall, 0.13).
-nodeCI(mannLab, 0.15).
-nodeCI(lifeSciences, 0.17).
-nodeCI(sciencesLectureHall, 0.18).
-nodeCI(firePolice, 0.20).
-nodeCI(studentCenter, 0.22).
-nodeCI(isp, 0.30).
-nodeCI(cloud, 0.50).
+nodeCI(parkingServices, 0.47).
+nodeCI(westEntry, 0.62).
+nodeCI(kleiberHall, 0.33).
+nodeCI(hoaglandAnnex, 0.79).
+nodeCI(briggsHall, 0.41).
+nodeCI(mannLab, 0.53).
+nodeCI(lifeSciences, 0.69).
+nodeCI(sciencesLectureHall, 0.26).
+nodeCI(firePolice, 0.84).
+nodeCI(studentCenter, 0.58).
+nodeCI(isp, 0.93).
+nodeCI(cloud, 0.12).
 
 link(isp, firePolice, 10, 80).
 link(firePolice, isp, 10, 80).

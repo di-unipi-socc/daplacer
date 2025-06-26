@@ -1,6 +1,11 @@
 % application(AppId, [ServiceIds]).
 application(museuMonitor, [interface, controller, dataStorage]).
 
+% dataType(DataId, Size, [SecReqs]).
+dataType(artStats, 0.5, [encryption]).
+dataType(visitorStats, 0.4, [auth, encryption]).
+dataType(videoStream, 2, [auth, encryption]).
+
 % service(ServiceId, [SWReqs], [HWReqs], [DataIds], MigrationCost).
 service(interface, [ubuntu], (2.4, 4, 128), [videoStream], 5).
 service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream], 30).
@@ -10,14 +15,9 @@ serviceCost(interface, 3.0).
 serviceCost(controller, 5.0).
 serviceCost(dataStorage, 6.0).
 
-serviceCI(interface, 0.15).
+serviceCI(interface, 0.08).
 serviceCI(controller, 0.18).
-serviceCI(dataStorage, 0.20).
-
-% dataType(DataId, Size, [SecReqs]).
-dataType(artStats, 0.5, [encryption]).
-dataType(visitorStats, 0.4, [auth, encryption]).
-dataType(videoStream, 2, [auth, encryption]).
+serviceCI(dataStorage, 0.38).
 
 %requirement(ReqID, SensorType/ActuatorType, [DataIds]).
 requirement(rCam, camera, [videoStream]).

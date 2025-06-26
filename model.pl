@@ -1,7 +1,7 @@
 % APPLICATION
 application(AppId, [ServiceIds]).
 
-service(ServiceId, [SWReqs], [HWReqs], [DataIds]).
+service(ServiceId, [SWReqs], (ReqCpu, ReqRam, ReqStorage), [DataIds]).
 serviceCost(ServiceId, MaxCost).
 serviceCI(ServiceId, MaxCI).
 
@@ -17,7 +17,7 @@ dataBinding(ServiceId, ReqId, SensorId).
 sensor(SensorId, Type, [DataIds]).
 actuator(ActuatorId, Type).
 
-node(NodeId, [SWCaps], HWCaps, [SecCaps], [IoTCaps]).
+node(NodeId, [SWCaps], (FeatCpu, FeatRam, FeatStorage), [SecCaps], [IoTCaps]).
 nodeCost(NodeId, Cost).
 nodeCI(NodeId, CarbonIntensity).
 

@@ -1,0 +1,275 @@
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr16-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr16-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr16-300425.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr32-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr32-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr32-300425.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr64-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr64-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr64-300425.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr128-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr128-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr128-300425.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr256-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr256-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr256-300425.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr512-3997.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr512-151195.pl
+Infra file saved to /Users/jacopomassa/GitHub/daplacer/daplacer/infrastructures/BA/infr512-300425.pl
+11:26:25.529 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Start-0 fired.[0m
+11:26:25.529 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-0 fired.[0m
+11:26:25.556 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.556 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.558 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-0 fired.[0m
+11:26:25.558 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-1 fired.[0m
+11:26:25.560 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.560 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.561 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-1 fired.[0m
+11:26:25.561 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-2 fired.[0m
+11:26:25.563 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.563 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.564 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-2 fired.[0m
+11:26:25.564 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-3 fired.[0m
+11:26:25.566 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.566 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.567 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-3 fired.[0m
+11:26:25.567 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-4 fired.[0m
+11:26:25.570 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.570 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.570 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-4 fired.[0m
+11:26:25.570 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-5 fired.[0m
+11:26:25.573 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.573 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.573 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-5 fired.[0m
+11:26:25.573 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-6 fired.[0m
+11:26:25.575 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.576 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.576 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-6 fired.[0m
+11:26:25.576 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-7 fired.[0m
+11:26:25.578 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.578 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.579 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-7 fired.[0m
+11:26:25.579 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-8 fired.[0m
+11:26:25.581 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.581 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.582 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-8 fired.[0m
+11:26:25.582 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-9 fired.[0m
+11:26:25.585 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.585 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.585 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-9 fired.[0m
+11:26:25.586 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mCOMMIT1 - Adding location data type[0m
+11:26:25.586 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Commit_1-0 fired.[0m
+11:26:25.586 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mAdding localisator service[0m
+11:26:25.587 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mAdding locStorage service[0m
+11:26:25.587 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mAdding rLoc requirement[0m
+Error executing query 'assert(requirement(rLoc, location, [location]))': permission_error(modify, static_procedure, '/'(requirement, 3))
+11:26:25.588 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mAdding e2e interactions[0m
+11:26:25.588 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-10 fired.[0m
+11:26:25.590 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.590 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.591 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-10 fired.[0m
+11:26:25.591 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-11 fired.[0m
+11:26:25.593 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.593 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.594 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-11 fired.[0m
+11:26:25.594 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-12 fired.[0m
+11:26:25.596 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.596 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.596 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-12 fired.[0m
+11:26:25.597 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-13 fired.[0m
+11:26:25.599 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.599 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.599 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-13 fired.[0m
+11:26:25.599 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-14 fired.[0m
+11:26:25.601 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.602 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.602 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-14 fired.[0m
+11:26:25.602 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-15 fired.[0m
+11:26:25.604 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.604 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.604 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-15 fired.[0m
+11:26:25.605 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-16 fired.[0m
+11:26:25.607 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.607 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.607 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-16 fired.[0m
+11:26:25.608 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-17 fired.[0m
+11:26:25.610 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.610 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.610 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-17 fired.[0m
+11:26:25.610 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-18 fired.[0m
+11:26:25.613 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.613 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.613 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-18 fired.[0m
+11:26:25.614 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-19 fired.[0m
+11:26:25.616 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.616 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.616 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-19 fired.[0m
+11:26:25.616 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mCOMMIT2 - Removing localisator service and its e2e interactions[0m
+11:26:25.616 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Commit_2-0 fired.[0m
+11:26:25.617 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-20 fired.[0m
+11:26:25.620 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.620 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.620 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-20 fired.[0m
+11:26:25.620 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-21 fired.[0m
+11:26:25.623 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.623 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.623 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-21 fired.[0m
+11:26:25.623 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-22 fired.[0m
+11:26:25.625 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.625 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.626 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-22 fired.[0m
+11:26:25.626 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-23 fired.[0m
+11:26:25.628 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.628 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.628 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-23 fired.[0m
+11:26:25.628 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-24 fired.[0m
+11:26:25.630 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.630 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.631 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-24 fired.[0m
+11:26:25.631 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-25 fired.[0m
+11:26:25.633 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.633 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.634 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-25 fired.[0m
+11:26:25.634 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-26 fired.[0m
+11:26:25.636 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.636 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.636 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-26 fired.[0m
+11:26:25.636 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-27 fired.[0m
+11:26:25.639 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.639 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.639 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-27 fired.[0m
+11:26:25.639 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-28 fired.[0m
+11:26:25.641 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.641 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.641 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-28 fired.[0m
+11:26:25.642 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-29 fired.[0m
+11:26:25.644 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.644 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.644 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-29 fired.[0m
+11:26:25.644 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mCOMMIT3 - Changing locStorage requirements[0m
+11:26:25.644 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Commit_3-0 fired.[0m
+11:26:25.644 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-30 fired.[0m
+11:26:25.646 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.647 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.647 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-30 fired.[0m
+11:26:25.647 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-31 fired.[0m
+11:26:25.649 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.649 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.649 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-31 fired.[0m
+11:26:25.650 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-32 fired.[0m
+11:26:25.652 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.652 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.653 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-32 fired.[0m
+11:26:25.653 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-33 fired.[0m
+11:26:25.655 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.655 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.655 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-33 fired.[0m
+11:26:25.655 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-34 fired.[0m
+11:26:25.657 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.657 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.658 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-34 fired.[0m
+11:26:25.658 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-35 fired.[0m
+11:26:25.660 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.660 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.660 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-35 fired.[0m
+11:26:25.660 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-36 fired.[0m
+11:26:25.662 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.662 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.663 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-36 fired.[0m
+11:26:25.663 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-37 fired.[0m
+11:26:25.665 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.665 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.665 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-37 fired.[0m
+11:26:25.665 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-38 fired.[0m
+11:26:25.667 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.667 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.668 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-38 fired.[0m
+11:26:25.668 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-39 fired.[0m
+11:26:25.670 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.670 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.670 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-39 fired.[0m
+11:26:25.670 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mCOMMIT4 - Changing e2e interaction parameters[0m
+11:26:25.670 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Commit_4-0 fired.[0m
+11:26:25.672 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-40 fired.[0m
+11:26:25.674 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.674 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.674 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-40 fired.[0m
+11:26:25.674 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-41 fired.[0m
+11:26:25.676 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.676 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.676 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-41 fired.[0m
+11:26:25.677 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-42 fired.[0m
+11:26:25.679 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.679 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.679 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-42 fired.[0m
+11:26:25.679 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-43 fired.[0m
+11:26:25.681 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.681 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.681 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-43 fired.[0m
+11:26:25.681 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-44 fired.[0m
+11:26:25.684 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.684 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.684 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-44 fired.[0m
+11:26:25.685 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-45 fired.[0m
+11:26:25.687 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.687 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.687 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-45 fired.[0m
+11:26:25.687 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-46 fired.[0m
+11:26:25.689 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.689 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.690 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-46 fired.[0m
+11:26:25.690 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-47 fired.[0m
+11:26:25.692 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.692 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.692 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-47 fired.[0m
+11:26:25.692 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-48 fired.[0m
+11:26:25.694 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.694 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.695 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-48 fired.[0m
+11:26:25.695 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-49 fired.[0m
+11:26:25.697 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.697 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.697 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-49 fired.[0m
+11:26:25.697 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Commit_5-0 fired.[0m
+11:26:25.697 | [1mINFO[0m | [1m[1mmuseuMonitor[0m[1m[0m - [1mCOMMIT5 - Changing e2e interaction parameters[0m
+11:26:25.697 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-50 fired.[0m
+11:26:25.699 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.699 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.700 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-50 fired.[0m
+11:26:25.700 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-51 fired.[0m
+11:26:25.702 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.702 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.702 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-51 fired.[0m
+11:26:25.702 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-52 fired.[0m
+11:26:25.704 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.704 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.705 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-52 fired.[0m
+11:26:25.705 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-53 fired.[0m
+11:26:25.707 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.707 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.707 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-53 fired.[0m
+11:26:25.707 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-54 fired.[0m
+11:26:25.709 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.709 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.709 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-54 fired.[0m
+11:26:25.710 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-55 fired.[0m
+11:26:25.712 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.712 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.712 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-55 fired.[0m
+11:26:25.712 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-56 fired.[0m
+11:26:25.715 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.715 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.715 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-56 fired.[0m
+11:26:25.715 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-57 fired.[0m
+11:26:25.717 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.717 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.717 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-57 fired.[0m
+11:26:25.718 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-58 fired.[0m
+11:26:25.720 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.720 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.720 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-58 fired.[0m
+11:26:25.720 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Enact-59 fired.[0m
+11:26:25.722 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37mPlacement of museuMonitor on infr32-3997[0m
+11:26:25.722 | [1m[35mECLYPSE[0m | [1m[1m[35mPlacementManager[0m[1m[0m - [37m{rVid -> smartphone0 | rDor -> smartphone0 | rCam -> smartphone1 | rGls -> smartphone2 | rArt -> accesspoint0 | rVst -> accesspoint0 | dataStorage -> isp2 | controller -> cabinet0 | interface -> accesspoint4}[0m
+11:26:25.722 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Tick-59 fired.[0m
+11:26:25.722 | [1m[35mECLYPSE[0m | [1m[1m[35mSimulation[0m[1m[0m - [37mEvent Stop-0 fired.[0m

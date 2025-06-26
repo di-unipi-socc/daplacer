@@ -5,16 +5,19 @@ placement(Ss, (HW,BW), PrevBW, Rs, P, (NewHW,NewBW), NewRs, NewP) :-
 	
 compatible(Ss,SNs) :- findCompatibles(Ss, Cs), sort(1, @>=, Cs, SNs).
 
+compareHWMode(Delta, (HW1, (_, Mode1)), (HW2, (_, Mode2))) :-
+    compare(C1, Mode1, Mode2),
+    ( C1 == (=) -> compare(Delta, HW1, HW2); Delta = C1).
+
 findCompatibles([S | Ss], [(L, S, SCompatibles) | Rest]) :-
 	findCompatibles(Ss, Rest),
 	findall((HWCaps, (N, Mode)), lightNodeOK(S, (N, Mode), HWCaps), RawCompatibles),
-	sort(2, @>=, RawCompatibles, ByHW),         % sort by HWCaps
-	sort(1, @=<, ByHW, SCompatibles),           % sort by Mode: all < hard
+	predsort(compareHWMode, RawCompatibles, SCompatibles),
 	length(SCompatibles, L).
 findCompatibles([], []).
 
-lightNodeOK(S, (N,all), HD) :- hardReqs(S, N, HD), softReqs(S, N).
-lightNodeOK(S, (N,hard), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
+lightNodeOK(S, (N, all), HD) :- hardReqs(S, N, HD), softReqs(S, N).
+lightNodeOK(S, (N, hard), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
 
 hardReqs(S, N, HD) :-
 	service(S, SWReqs, HWReqs, DataIds, _),
