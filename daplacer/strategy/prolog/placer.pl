@@ -30,7 +30,16 @@ hardReqs(S, N, HD) :-
 softReqs(S, N) :-
 	serviceCost(S, MaxCost), serviceCI(S, MaxCI),
 	nodeCost(N, Cost), nodeCI(N, CI),
+	% write('Service '), write(S), write(' MaxCost: '), writeln(MaxCost),
+	% write('Service '), write(S), write(' MaxCI: '), writeln(MaxCI),
+	% write('Node '), write(N), write(' Cost: '), writeln(Cost),
+	% write('Node '), write(N), write(' CI: '), writeln(CI),
 	Cost =< MaxCost, CI =< MaxCI.
+
+nodeCost(N, Cost) :-
+	nodeUnitCost(N, CCpu, CRam, CHDD),
+	node(N, _, (FeatCPU, FeatRAM, FeatHDD), _, _),
+	Cost is CCpu * FeatCPU + CRam * FeatRAM + CHDD * FeatHDD.
 
 checkHW((ReqCPU, ReqRAM, ReqHDD),(FeatCPU, FeatRAM, FeatHDD)) :-
 	FeatCPU >= ReqCPU,

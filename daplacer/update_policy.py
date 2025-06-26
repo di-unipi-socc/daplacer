@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import random as rnd
 from collections import defaultdict
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from networkx.classes.reportviews import (
@@ -13,13 +13,13 @@ if TYPE_CHECKING:
 
 class ChangePolicy:
 
-    def __init__(self, seed: int, change_prob: float, fail_prob: float = 0.01):
+    def __init__(self, seed: int, change_prob: float, fail_prob: float = 0.02):
         self.change_probability = change_prob
         self.fail_probability = fail_prob
         self.old_resources = defaultdict(lambda: None)
         self.rnd = rnd.Random(seed)
 
-    def __call__(self, components):
+    def __call__(self, components: Union[NodeView, EdgeView]):
         pass
 
     def fail(self):
@@ -40,8 +40,8 @@ class ChangeNodePolicy(ChangePolicy):
             elif rnd.random() < self.change_probability:
                 ram = self.old_resources[n]["Ram"]  # resources["Ram"]
                 hdd = self.old_resources[n]["Storage"]  # resources["Storage"]
-                resources["Ram"] = round(rnd.uniform(ram // 10, ram * 1.1), 2)
-                resources["Storage"] = round(rnd.uniform(hdd // 10, hdd * 1.2), 2)
+                resources["Ram"] = round(rnd.uniform(ram * 0.9, ram * 1.1), 2)
+                resources["Storage"] = round(rnd.uniform(hdd * 0.9, hdd * 1.2), 2)
 
 
 class ChangeLinkPolicy(ChangePolicy):
@@ -61,16 +61,15 @@ class ChangeLinkPolicy(ChangePolicy):
                     "bandwidth"
                 ]  # resources["bandwidth"]
                 resources["latency"] = round(
-                    rnd.uniform(latency // 2, latency * 1.5), 2
+                    rnd.uniform(latency * 0.85, latency * 1.15), 2
                 )
                 resources["bandwidth"] = round(
-                    rnd.uniform(bandwidth // 2, bandwidth * 1.1), 2
+                    rnd.uniform(bandwidth * 0.9, bandwidth * 1.1), 2
                 )
 
 
 def get_policies(seed: int, change_prob: float):
-    # return (
-    #     ChangeNodePolicy(seed=seed, change_prob=change_prob),
-    #     ChangeLinkPolicy(seed=seed, change_prob=change_prob),
-    # )
-    return None, None
+    return (
+        ChangeNodePolicy(seed=seed, change_prob=change_prob),
+        ChangeLinkPolicy(seed=seed, change_prob=change_prob),
+    )

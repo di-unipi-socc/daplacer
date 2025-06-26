@@ -23,13 +23,17 @@ from daplacer.assets import (
     get_default_path_aggregators,
     node_assets,
 )
+from daplacer.builder import generate_infrastructures
 from daplacer.commits import get_commits
 from daplacer.infrastructures.parser import get_infrastructure
 from daplacer.metrics import get_metrics
-from daplacer.search_space import search_space, NODES, SEEDS
+from daplacer.search_space import (
+    NODES,
+    SEEDS,
+    search_space,
+)
 from daplacer.strategy import DAPlacerStrategy
 from daplacer.update_policy import get_policies
-from daplacer.builder import generate_infrastructures
 
 
 def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
@@ -53,8 +57,8 @@ def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
                 include_default_callbacks=False,
                 events=get_metrics() + get_commits(config["max_ticks"], prolog),
                 path=path,
-                # log_level="TRACE",
-                # log_to_file=True,
+                log_level="TRACE",
+                log_to_file=True,
             )
 
             app = get_application(

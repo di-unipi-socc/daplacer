@@ -5,7 +5,7 @@ from typing import List
 import networkx as nx
 from numpy import log2
 
-from daplacer.utils import INFRS_DIR
+from daplacer.utils import INFRS_DIR, NODE, NODE_CI, NODE_UNIT_COST, LINK
 
 LAT_MIN, LAT_MAX = 2, 20
 BW_MIN, BW_MAX = 100, 500
@@ -14,45 +14,45 @@ SEC_CAPS = ["encryption", "auth"]
 NODE_TYPES = {
     "smartphone": {
         "sw": ["ubuntu", "python"],
-        "cpu": 2.4,
-        "ram": 4,
-        "storage": 32,
+        "cpu": [2, 4],
+        "ram": [4, 8],
+        "storage": [16, 32, 64],
     },
     "accesspoint": {
         "sw": ["ubuntu", "mySQL"],
-        "cpu": 3,
-        "ram": 6,
-        "storage": 128,
+        "cpu": [4, 8],
+        "ram": [6, 8, 12],
+        "storage": [64, 128],
     },
     "cabinet": {
         "sw": ["python", "mySQL"],
-        "cpu": 4,
-        "ram": 8,
-        "storage": 256,
+        "cpu": [4, 8],
+        "ram": [8, 16],
+        "storage": [128, 256],
     },
     "isp": {
         "sw": ["ubuntu", "mySQL", "python"],
-        "cpu": 5,
-        "ram": 16,
-        "storage": 512,
+        "cpu": [16, 32],
+        "ram": [16, 32],
+        "storage": [256, 512, 1024],
     },
     "cloud": {
         "sw": ["ubuntu", "mySQL", "python"],
-        "cpu": 128,
-        "ram": 64,
-        "storage": 1024,
+        "cpu": [64, 128],
+        "ram": [32, 64],
+        "storage": [1024, 2048],
     },
 }
 
-NODE_COST_RANGES = {
-    "cloud": (5.0, 7.0),
-    "isp": (3.5, 5),
-    "cabinet": (2.0, 3.5),
-    "accesspoint": (1.0, 2.0),
-    "smartphone": (0.5, 1.5),
+NODE_UNIT_COSTS = {
+    "smartphone": (0.002, 0.0005, 0.0001),
+    "accesspoint": (0.005, 0.0008, 0.0001),
+    "cabinet": (0.01369366, 0.00150366, 0.0002),
+    "isp": (0.052624, 0.0057785, 0.0002),
+    "cloud": (0.052624, 0.0057785, 0.0002),
 }
 
-NODE_CI_RANGE = (0.04, 1)
+NODE_CI_RANGE = (0.04, 0.8)
 
 APPENDIX = (
     "dataBinding(interface, rCam, cam20).\n"
@@ -125,7 +125,8 @@ class InfraBuilder(nx.Graph):
             label_map[node] = nid
 
             spec = NODE_TYPES[t]
-            cost = round(self.rng.uniform(*NODE_COST_RANGES[t]), 2)
+            # cost = round(self.rng.uniform(*NODE_UNIT_COSTS[t]), 2)
+            cost = NODE_UNIT_COSTS[t]
             ci = round(self.rng.uniform(*NODE_CI_RANGE), 2)
             self.add_node(
                 nid,
@@ -133,8 +134,10 @@ class InfraBuilder(nx.Graph):
                 cost=cost,
                 ci=ci,
                 things=[],
-                sec=SEC_CAPS,
-                **spec,
+                sw=spec["sw"],
+                cpu=self.rng.choice(spec["cpu"]),
+                ram=self.rng.choice(spec["ram"]),
+                storage=self.rng.choice(spec["storage"]),
             )
 
         for u, v in g.edges:
@@ -172,29 +175,52 @@ class InfraBuilder(nx.Graph):
 
         with self.file.open("w") as f:
             output = f"bwTh({self.bw_threshold}).\n\n"
+
             # node/5
-            for n, d in self.nodes(data=True):
-                output += (
-                    f"node({n}, {d['sw']}, ({d['cpu']}, {d['ram']}, {d['storage']}), "
-                    f"{d['sec']}, {d['things']}).\n"
-                ).replace("'", "")
-            output += "\n"
+            output += ".\n".join(
+                [
+                    NODE.format(
+                        cpu=d["cpu"],
+                        ram=d["ram"],
+                        storage=d["storage"],
+                        sw=d["sw"],
+                        node_id=n,
+                        sec_caps=SEC_CAPS,
+                        things=d["things"],
+                    ).replace("'", "")
+                    for n, d in self.nodes(data=True)
+                ]
+            )
+            output += ".\n\n"
 
             # nodeCost/2
-            for n, d in self.nodes(data=True):
-                output += f"nodeCost({n}, {d['cost']}).\n"
-            output += "\n"
+            output += ".\n".join(
+                [
+                    NODE_UNIT_COST.format(
+                        node_id=n, cpu_cost=c[0], ram_cost=c[1], storage_cost=c[2]
+                    )
+                    for n, c in self.nodes(data="cost")
+                ]
+            )
+            output += ".\n\n"
 
             # nodeCI/2
-            for n, d in self.nodes(data=True):
-                output += f"nodeCI({n}, {d['ci']}).\n"
-            output += "\n"
+            output += ".\n".join(
+                [
+                    NODE_CI.format(node_id=n, ci=d["ci"])
+                    for n, d in self.nodes(data=True)
+                ]
+            )
+            output += ".\n\n"
 
             # link/4 (both directions)
             for u, v, d in self.edges(data=True):
-                output += f"link({u}, {v}, {d['lat']}, {d['bw']}).\n"
-                output += f"link({v}, {u}, {d['lat']}, {d['bw']}).\n"
-            output += "\n"
+                output += (
+                    LINK.format(u=u, v=v, latency=d["lat"], bandwidth=d["bw"]) + ".\n"
+                )
+                output += (
+                    LINK.format(u=v, v=u, latency=d["lat"], bandwidth=d["bw"]) + ".\n"
+                )
             f.write(APPENDIX + output)
         print(f"Infra file saved to {self.file}")
 
@@ -206,3 +232,9 @@ def generate_infrastructures(nodes: List[int], seeds: List[int], verbose=False):
             builder.upload()
             if verbose:
                 print(f"Generated infrastructure with {n} nodes and seed {seed}.")
+
+
+if __name__ == "__main__":
+    NODES = [16]
+    SEEDS = [3997]
+    generate_infrastructures(NODES, SEEDS, verbose=True)

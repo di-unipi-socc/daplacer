@@ -18,7 +18,7 @@ sensor(SensorId, Type, [DataIds]).
 actuator(ActuatorId, Type).
 
 node(NodeId, [SWCaps], (FeatCpu, FeatRam, FeatStorage), [SecCaps], [IoTCaps]).
-nodeCost(NodeId, Cost).
+nodeUnitCost(NodeId, CpuUnitCost, RamUnitCost, StorageUnitCost).
 nodeCI(NodeId, CarbonIntensity).
 
 link(NodeId1, NodeId2, FeatLat, FeatBw).

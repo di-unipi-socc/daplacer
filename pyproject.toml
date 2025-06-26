@@ -6,14 +6,14 @@ authors = [{ name = "Jacopo Massa", email = "jacopomassa97@gmail.com" }]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.14"
+python = ">=3.11.0rc1,<3.14"
 pandas = "^2.3.0"
 numpy = "^2.3.1"
 networkx = "^3.5"
 swiplserver = "^1.0.2"
-eclypse = "^0.7.1"
-ray = "^2.47.1"
-prolog-to-networkx = {git = "https://github.com/jacopo-massa/prolog-to-networkx"}
+eclypse = "^0.7.3"
+ray = {extras = ["train"], version = "^2.47.1"}
+prolog-to-networkx = { git = "https://github.com/jacopo-massa/prolog-to-networkx" }
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

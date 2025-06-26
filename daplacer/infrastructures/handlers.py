@@ -11,9 +11,13 @@ def node_ci_handler(infrastructure: Infrastructure, **iattr: Dict[str, Any]):
     infrastructure.nodes[nid]["CarbonIntensity"] = iattr["CI"]
 
 
-def node_cost_handler(infrastructure: Infrastructure, **iattr: Dict[str, Any]):
+def node_unit_cost_handler(infrastructure: Infrastructure, **iattr: Dict[str, Any]):
     nid = iattr["NodeId"]
-    infrastructure.nodes[nid]["Cost"] = iattr["Cost"]
+    infrastructure.nodes[nid]["Cost"] = {
+        "Cpu": iattr["CpuCost"],
+        "Ram": iattr["RamCost"],
+        "Storage": iattr["StorageCost"],
+    }
 
 
 def node_handler(infrastructure: Infrastructure, **nattr: Dict[str, Any]):
@@ -50,7 +54,7 @@ def get_handlers() -> Dict[str, Callable]:
     return {
         "bwTh": bwth_handler,
         "nodeCI": node_ci_handler,
-        "nodeCost": node_cost_handler,
+        "nodeUnitCost": node_unit_cost_handler,
         "node": node_handler,
         "link": link_handler,
         "sensor": sensor_handler,

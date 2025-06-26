@@ -25,20 +25,28 @@ node(sciencesLectureHall, [ubuntu, mySQL], (3, 6, 256), [encryption, auth], [vst
 node(firePolice, [ubuntu, mySQL, python], (4, 8, 512), [encryption, auth], []).
 node(studentCenter, [ubuntu, mySQL, python], (4, 8, 512), [encryption, auth], [glass4]).
 node(isp, [ubuntu, mySQL], (5, 16, 600), [encryption, auth], []).
-node(cloud, [ubuntu, mySQL, python], (6, 32, 10000), [encryption, auth], []).
+node(cloud, [ubuntu, mySQL, python], (6, 32, 1000), [encryption, auth], []).
 
-nodeCost(parkingServices, 2.0).
-nodeCost(westEntry, 1.5).
-nodeCost(kleiberHall, 1.8).
-nodeCost(hoaglandAnnex, 2.2).
-nodeCost(briggsHall, 2.5).
-nodeCost(mannLab, 2.8).
-nodeCost(lifeSciences, 3.0).
-nodeCost(sciencesLectureHall, 3.2).
-nodeCost(firePolice, 3.5).
-nodeCost(studentCenter, 3.8).
-nodeCost(isp, 4.0).
-nodeCost(cloud, 6.0).
+% Smartphone nodes
+nodeUnitCost(parkingServices, 0.002, 0.0005, 0.00001).
+nodeUnitCost(westEntry, 0.002, 0.0005, 0.00001).
+nodeUnitCost(kleiberHall, 0.002, 0.0005, 0.00001).
+nodeUnitCost(hoaglandAnnex, 0.002, 0.0005, 0.00001).
+
+% Access Point nodes
+nodeUnitCost(briggsHall, 0.005, 0.0008, 0.00002).
+nodeUnitCost(mannLab, 0.005, 0.0008, 0.00002).
+
+% Cabinet nodes
+nodeUnitCost(lifeSciences, 0.01369366, 0.00150366, 0.000111).
+nodeUnitCost(sciencesLectureHall, 0.01369366, 0.00150366, 0.000111).
+nodeUnitCost(firePolice, 0.01369366, 0.00150366, 0.000111).
+
+% ISP
+nodeUnitCost(isp, 0.052624, 0.0057785, 0.000111).
+
+% Cloud
+nodeUnitCost(cloud, 0.052624, 0.0057785, 0.000111).
 
 nodeCI(parkingServices, 0.47).
 nodeCI(westEntry, 0.62).
@@ -47,8 +55,8 @@ nodeCI(hoaglandAnnex, 0.79).
 nodeCI(briggsHall, 0.41).
 nodeCI(mannLab, 0.53).
 nodeCI(lifeSciences, 0.69).
-nodeCI(sciencesLectureHall, 0.26).
-nodeCI(firePolice, 0.84).
+nodeCI(sciencesLectureHall, 0.19).
+nodeCI(firePolice, 0.04).
 nodeCI(studentCenter, 0.58).
 nodeCI(isp, 0.93).
 nodeCI(cloud, 0.12).

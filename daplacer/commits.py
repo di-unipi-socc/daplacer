@@ -28,6 +28,7 @@ if TYPE_CHECKING:
     from eclypse.workflow.event import EclypseEvent
     from swiplserver import PrologThread
 
+# TODO: Check why at commit tick, is_placed is False
 
 def get_commits(ticks: int, prolog: PrologThread) -> List[EclypseEvent]:
     tick_step = ticks // 6

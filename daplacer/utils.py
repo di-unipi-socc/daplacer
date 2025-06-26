@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, Optional
-from libcst import List
+from typing import Any, Dict, List, Optional
 import numpy as np
 
 from swiplserver import (
@@ -23,12 +22,21 @@ PL_FILE = PL_STRATEGY_DIR / "daplacer.pl"
 APP_NAME = "museuMonitor"
 PL_QUERY = f"dap({APP_NAME}, Placement, Routes, Inferences, Time)"
 
-DATA_TYPE = "dataType({data_id}, {size}, {sec_reqs})"
-REQUIREMENT = "requirement({req_id}, {thg_type}, {data_ids})"
+# Application templates
+APPLICATION = "application({app_id}, {service_ids})"
 SERVICE = "service({service_id}, {sw}, ({cpu}, {ram}, {storage}), {data_ids}, {migration_cost})"
-E2E = "e2e({source_id}, {target_id}, {latency}, {data_rates})"
 SERVICE_COST = "serviceCost({service_id}, {max_cost})"
 SERVICE_CI = "serviceCI({service_id}, {max_ci})"
+
+DATA_TYPE = "dataType({data_id}, {size}, {sec_reqs})"
+REQUIREMENT = "requirement({req_id}, {thg_type}, {data_ids})"
+E2E = "e2e({source_id}, {target_id}, {latency}, {data_rates})"
+
+# Infrastructure templates
+NODE = "node({node_id}, {sw}, ({cpu}, {ram}, {storage}), {sec_caps}, {things})"
+NODE_UNIT_COST = "nodeUnitCost({node_id}, {cpu_cost}, {ram_cost}, {storage_cost})"
+NODE_CI = "nodeCI({node_id}, {ci})"
+LINK = "link({u}, {v}, {latency}, {bandwidth})"
 
 ASSERT = "assert({})"
 RETRACT = "retractall({})"

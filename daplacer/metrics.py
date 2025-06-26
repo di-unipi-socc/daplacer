@@ -22,16 +22,28 @@ def soft_constraints(_: Application, placement: Placement, __: Infrastructure) -
     Count the number of chosen relaxed node in the placement.
     """
     rlx = placement.strategy.n_relaxed
-    placement.strategy.n_relaxed = -1
+    # placement.strategy.n_relaxed = -1
     return rlx
 
 
 @metric.application
 def execution_time(_: Application, placement: Placement, __: Infrastructure) -> float:
     exec_time = placement.strategy.exec_time
-    placement.strategy.exec_time = -1
+    # placement.strategy.exec_time = -1
     return exec_time
 
 
+@metric.application
+def is_placed(
+    application: Application, placement: Placement, __: Infrastructure
+) -> bool:
+    """
+    Check if the application is placed.
+    """
+    application.logger.error(placement.mapping.keys())
+    application.logger.success(application.nodes)
+    return len(placement.mapping) == len(application.nodes)
+
+
 def get_metrics() -> List[EclypseEvent]:
-    return [soft_constraints, execution_time]
+    return [soft_constraints, execution_time, is_placed]

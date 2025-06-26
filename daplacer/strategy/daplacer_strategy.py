@@ -40,8 +40,6 @@ def place_bindings(
     )
     partial_placement = {}
     bindings = infrastructure.graph.get("dataBindings", [])
-    # infrastructure.logger.success(all_things)
-    # infrastructure.logger.error(bindings)
     for n, nthings in infrastructure.nodes(data="IoT"):
         if nthings:
             for t in nthings:
@@ -51,11 +49,6 @@ def place_bindings(
                             partial_placement[req_id] = n
                             all_things.remove(t)
                             break
-    # unplaced_things = [t for t in all_things if t not in partial_placement]
-    # for t in unplaced_things:
-    #     random_node = random.choice(all_nodes)
-    #     partial_placement[t] = random_node
-    #     infrastructure.nodes[random_node]["IoT"].append(t)
     return partial_placement
 
 
@@ -97,7 +90,6 @@ class DAPlacerStrategy(PlacementStrategy):
         self.sync_edges(application)
         mapping = place_bindings(infrastructure, application)
         self.sync_available_nodes(infrastructure)
-
         service_mapping, relaxed, exec_time = pl_process(
             self.prolog,
             application.name,

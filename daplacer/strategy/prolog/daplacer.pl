@@ -1,6 +1,6 @@
 :- ['placer.pl', 'routes.pl'].
 % :- ['../../applications/prolog/museuMonitor.pl'].
-% :- ['../../infrastructures/BA/infr32-42.pl'].
+% :- ['../../infrastructures/BA/infr16-3997.pl'].
 % :-['../../infrastructures/UC.pl'].
 :- dynamic deployment/4.
 

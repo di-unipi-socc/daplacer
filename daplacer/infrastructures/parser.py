@@ -9,7 +9,7 @@ from eclypse.graph import Infrastructure
 from daplacer.infrastructures.handlers import get_handlers
 
 infra_cfg = ptn.FactsConfig(
-    node_facts=["node", "nodeType", "location", "provider"],
+    node_facts=["node", "nodeCI", "nodeUnitCost"],
     edge_facts="link",
 )
 
@@ -17,8 +17,8 @@ infra_cfg = ptn.FactsConfig(
 infra_cfg.add_fact("bwTh", "Threshold")
 
 # Costi e CI
-infra_cfg.add_fact("nodeCI", "NodeId", "CI")
-infra_cfg.add_fact("nodeCost", "NodeId", "Cost")
+infra_cfg.add_node_fact("nodeCI", "CI")
+infra_cfg.add_node_fact("nodeUnitCost", "CpuCost", "RamCost", "StorageCost")
 
 # Nodes
 infra_cfg.add_node_fact("node", "Sw", ("Cpu", "Ram", "Storage"), "Sec", "IoT")
