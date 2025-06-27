@@ -7,6 +7,7 @@ from swiplserver import (
 
 from daplacer.utils import (
     PL_QUERY,
+    RELAXED_BIND,
     parse_prolog,
     timed_async_query,
     timed_query,
@@ -29,16 +30,18 @@ def pl_process(
 
     mapping = parse_prolog(r["Placement"]) if r else {}
     exec_time = timeout if r is None else end_time if r == False else r["Time"]
+    inferences = r["Inferences"] if r else 0
     relaxed = -1
 
     if mapping:
-        relaxed = sum(1 for _, (_, m) in mapping if m == "hard")
+        relaxed = sum(1 for _, (_, m) in mapping if m == RELAXED_BIND)
         mapping = {s: n for s, (n, _) in mapping}
         # str_pl = (
         #     "[" + ", ".join(["({}, {})".format(s, n) for s, n in mapping.items()]) + "]"
         # )
         # print(f"Assert PL mapping: {str_pl}")
     else:
+        print("No mapping found, asserting empty placement.")
         timed_query(prolog, query="retractall(deployment(_,_,_,_))")
 
-    return mapping, relaxed, exec_time
+    return mapping, exec_time, inferences, relaxed

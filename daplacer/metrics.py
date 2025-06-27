@@ -17,33 +17,40 @@ if TYPE_CHECKING:
 
 
 @metric.application
-def soft_constraints(_: Application, placement: Placement, __: Infrastructure) -> int:
+def soft_constraints(_: Application, pl: Placement, __: Infrastructure) -> int:
     """
     Count the number of chosen relaxed node in the placement.
     """
-    rlx = placement.strategy.n_relaxed
-    # placement.strategy.n_relaxed = -1
+    rlx = pl.strategy.n_relaxed
+    pl.strategy.n_relaxed = -1
     return rlx
 
 
 @metric.application
-def execution_time(_: Application, placement: Placement, __: Infrastructure) -> float:
-    exec_time = placement.strategy.exec_time
-    # placement.strategy.exec_time = -1
+def execution_time(_: Application, pl: Placement, __: Infrastructure) -> float:
+    exec_time = pl.strategy.exec_time
+    pl.strategy.exec_time = -1
     return exec_time
 
 
 @metric.application
-def is_placed(
-    application: Application, placement: Placement, __: Infrastructure
-) -> bool:
+def inferences(_: Application, pl: Placement, __: Infrastructure) -> int:
     """
-    Check if the application is placed.
+    Count the number of inferences made by the Prolog engine.
     """
-    application.logger.error(placement.mapping.keys())
-    application.logger.success(application.nodes)
-    return len(placement.mapping) == len(application.nodes)
+    inferences = pl.strategy.inferences
+    pl.strategy.inferences = -1
+    return inferences
+
+
+@metric.application
+def is_placed(app: Application, pl: Placement, __: Infrastructure) -> bool:
+    return len(pl.mapping) == len(app.nodes)
 
 
 def get_metrics() -> List[EclypseEvent]:
-    return [soft_constraints, execution_time, is_placed]
+    return [
+        soft_constraints,
+        execution_time,
+        is_placed,
+    ]

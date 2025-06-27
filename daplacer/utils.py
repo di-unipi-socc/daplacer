@@ -17,8 +17,11 @@ from swiplserver import (
 ROOT_DIR = Path(__file__).parent
 INFRS_DIR = ROOT_DIR / "infrastructures"
 PL_STRATEGY_DIR = ROOT_DIR / "strategy" / "prolog"
-PL_FILE = PL_STRATEGY_DIR / "daplacer.pl"
+DAP_FILE = PL_STRATEGY_DIR / "daplacer.pl"
+PL_ALL_FILE = PL_STRATEGY_DIR / "placer-all.pl"
+PL_RELAXED_FILE = PL_STRATEGY_DIR / "placer-relaxed.pl"
 
+RELAXED_BIND = "relaxed"
 APP_NAME = "museuMonitor"
 PL_QUERY = f"dap({APP_NAME}, Placement, Routes, Inferences, Time)"
 
@@ -40,9 +43,11 @@ LINK = "link({u}, {v}, {latency}, {bandwidth})"
 
 ASSERT = "assert({})"
 RETRACT = "retractall({})"
+CONSULT = "consult('{}')"
 
 DYNAMICS = [
     "node/5",
+    "link/4",
     "service/5",
     "dataType/3",
     "e2e/4",
@@ -62,6 +67,10 @@ def parse_prolog(query):
     else:
         ans = query
     return ans
+
+
+def consult(prolog: PrologThread, file: str):
+    timed_query(prolog=prolog, query=CONSULT.format(file), clean=False)
 
 
 def timed_async_query(

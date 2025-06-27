@@ -19,7 +19,7 @@ class ChangePolicy:
         self.old_resources = defaultdict(lambda: None)
         self.rnd = rnd.Random(seed)
 
-    def __call__(self, components: Union[NodeView, EdgeView]):
+    def __call__(self, _: Union[NodeView, EdgeView]):
         pass
 
     def fail(self):
@@ -29,7 +29,7 @@ class ChangePolicy:
 class ChangeNodePolicy(ChangePolicy):
 
     def __call__(self, nodes: NodeView):
-        for n, resources in nodes.data(data=True):
+        for n, resources in nodes.data():
             if self.old_resources[n] is None:
                 self.old_resources[n] = resources.copy()
             else:
@@ -38,10 +38,10 @@ class ChangeNodePolicy(ChangePolicy):
                 resources["Ram"] = 0
                 resources["Storage"] = 0
             elif rnd.random() < self.change_probability:
-                ram = self.old_resources[n]["Ram"]  # resources["Ram"]
-                hdd = self.old_resources[n]["Storage"]  # resources["Storage"]
+                ram = self.old_resources[n]["Ram"]
+                hdd = self.old_resources[n]["Storage"]
                 resources["Ram"] = round(rnd.uniform(ram * 0.9, ram * 1.1), 2)
-                resources["Storage"] = round(rnd.uniform(hdd * 0.9, hdd * 1.2), 2)
+                resources["Storage"] = round(rnd.uniform(hdd * 0.8, hdd * 1.2), 2)
 
 
 class ChangeLinkPolicy(ChangePolicy):
@@ -50,16 +50,12 @@ class ChangeLinkPolicy(ChangePolicy):
         for n1, n2, resources in links.data():
             if self.old_resources[(n1, n2)] is None:
                 self.old_resources[(n1, n2)] = resources.copy()
-            # if self.fail():
-            #     resources["latency"] = 1000
-            #     resources["bandwidth"] = 0
+            if self.fail():
+                resources["latency"] = 1000
+                resources["bandwidth"] = 0
             if rnd.random() < self.change_probability:
-                latency = self.old_resources[(n1, n2)][
-                    "latency"
-                ]  # resources["latency"]
-                bandwidth = self.old_resources[(n1, n2)][
-                    "bandwidth"
-                ]  # resources["bandwidth"]
+                latency = self.old_resources[(n1, n2)]["latency"]
+                bandwidth = self.old_resources[(n1, n2)]["bandwidth"]
                 resources["latency"] = round(
                     rnd.uniform(latency * 0.85, latency * 1.15), 2
                 )

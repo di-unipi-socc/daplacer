@@ -1,4 +1,3 @@
-import time
 from pathlib import Path
 from typing import (
     Any,
@@ -18,11 +17,6 @@ from ray import (
 from swiplserver import PrologMQI
 
 from daplacer.applications.parser import get_application
-from daplacer.assets import (
-    edge_assets,
-    get_default_path_aggregators,
-    node_assets,
-)
 from daplacer.builder import generate_infrastructures
 from daplacer.commits import get_commits
 from daplacer.infrastructures.parser import get_infrastructure
@@ -30,7 +24,6 @@ from daplacer.metrics import get_metrics
 from daplacer.search_space import (
     NODES,
     SEEDS,
-    search_space,
 )
 from daplacer.strategy import DAPlacerStrategy
 from daplacer.update_policy import get_policies
@@ -55,16 +48,14 @@ def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
                 max_ticks=config["max_ticks"],
                 tick_every_ms="auto",
                 include_default_callbacks=False,
-                events=get_metrics() + get_commits(config["max_ticks"], prolog),
+                events=get_commits(config["max_ticks"], prolog) + get_metrics(),
                 path=path,
-                log_level="TRACE",
                 log_to_file=True,
+                # log_level="TRACE",
             )
 
             app = get_application(
                 application_id=config["application_id"],
-                node_assets=node_assets,
-                edge_assets=edge_assets,
                 seed=config["seed"],
             )
 
@@ -78,16 +69,15 @@ def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
                 topology=config["topology"],
                 node_update_policy=node_update_policy,
                 edge_update_policy=edge_update_policy,
-                node_assets=node_assets,
-                edge_assets=edge_assets,
-                path_assets_aggregators=get_default_path_aggregators(),
             )
 
             sim = Simulation(infrastructure=infr, simulation_config=sim_config)
             sim.register(
                 application=app,
                 placement_strategy=DAPlacerStrategy(
-                    prolog=prolog, timeout=config["timeout"]
+                    prolog=prolog,
+                    timeout=config["timeout"],
+                    relaxed=config["relaxed"],
                 ),
             )
 
@@ -102,18 +92,23 @@ if __name__ == "__main__":
         "seed": 3997,
         "topology": "BA",
         "timeout": 100,
-        "max_ticks": 20,
+        "max_ticks": 60,
         "change_prob": 0.1,
+        "relaxed": False,
     }
 
     # generate all the infrastructures and corresponding Prolog knowledge bases
     generate_infrastructures(nodes=NODES, seeds=SEEDS)
+
     # Example usage of the daplacer_grid function
     daplacer_grid(config_example, with_ray=False)
+
+    # Usage with Ray Tune
     # ray.init(address="auto")
+    # name = input("Experiment name: ")
 
     # start_time = time()
-    # run_config = train.RunConfig(storage_path=(DEFAULT_SIM_PATH).resolve())
+    # run_config = train.RunConfig(name=name, storage_path=(DEFAULT_SIM_PATH).resolve())
     # tuner = tune.Tuner(daplacer_grid, param_space=search_space, run_config=run_config)
 
     # # tuner = tune.Tuner.restore(

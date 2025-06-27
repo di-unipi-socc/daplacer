@@ -17,7 +17,7 @@ findCompatibles([S | Ss], [(L, S, SCompatibles) | Rest]) :-
 findCompatibles([], []).
 
 lightNodeOK(S, (N, all), HD) :- hardReqs(S, N, HD), softReqs(S, N).
-lightNodeOK(S, (N, hard), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
+% lightNodeOK(S, (N, relaxed), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
 
 hardReqs(S, N, HD) :-
 	service(S, SWReqs, HWReqs, DataIds, _),
@@ -30,10 +30,6 @@ hardReqs(S, N, HD) :-
 softReqs(S, N) :-
 	serviceCost(S, MaxCost), serviceCI(S, MaxCI),
 	nodeCost(N, Cost), nodeCI(N, CI),
-	% write('Service '), write(S), write(' MaxCost: '), writeln(MaxCost),
-	% write('Service '), write(S), write(' MaxCI: '), writeln(MaxCI),
-	% write('Node '), write(N), write(' Cost: '), writeln(Cost),
-	% write('Node '), write(N), write(' CI: '), writeln(CI),
 	Cost =< MaxCost, CI =< MaxCI.
 
 nodeCost(N, Cost) :-

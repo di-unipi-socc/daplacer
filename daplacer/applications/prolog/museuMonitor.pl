@@ -11,13 +11,13 @@ service(interface, [ubuntu], (2.4, 4, 128), [videoStream], 5).
 service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream], 30).
 service(dataStorage, [mySQL, ubuntu], (5, 4, 512), [artStats, visitorStats], 100).
 
-serviceCost(interface, 0.08).
-serviceCost(controller, 0.2).
+serviceCost(interface, 0.2).
+serviceCost(controller, 0.5).
 serviceCost(dataStorage, 8).
 
-serviceCI(interface, 0.1).
-serviceCI(controller, 0.2).
-serviceCI(dataStorage, 0.6).
+serviceCI(interface, 0.6).
+serviceCI(controller, 0.42).
+serviceCI(dataStorage, 0.75).
 
 %requirement(ReqID, SensorType/ActuatorType, [DataIds]).
 requirement(rCam, camera, [videoStream]).

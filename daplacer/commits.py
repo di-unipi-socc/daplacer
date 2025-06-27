@@ -28,7 +28,6 @@ if TYPE_CHECKING:
     from eclypse.workflow.event import EclypseEvent
     from swiplserver import PrologThread
 
-# TODO: Check why at commit tick, is_placed is False
 
 def get_commits(ticks: int, prolog: PrologThread) -> List[EclypseEvent]:
     tick_step = ticks // 6
@@ -244,4 +243,10 @@ def get_commits(ticks: int, prolog: PrologThread) -> List[EclypseEvent]:
             "DataRates": [("location", 60)],
         }
 
-    return [commit_1, commit_2, commit_3, commit_4, commit_5]
+    @event(event_type="application", activates_on="tick", verbose=True)
+    def invalidate_placement(
+        app: Application, placement: Placement, __: Infrastructure
+    ):
+        placement._reset_mapping()
+
+    return [commit_1, commit_2, commit_3, commit_4, commit_5, invalidate_placement]

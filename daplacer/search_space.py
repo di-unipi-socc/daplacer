@@ -11,6 +11,7 @@ search_space = {
     "nodes": grid_search(NODES),
     "topology": "BA",
     "change_prob": grid_search([0.1, 0.2, 0.4, 0.5]),
+    "relaxed": grid_search([True, False]),
 }
 
 __all__ = ["search_space", NODES, SEEDS]
