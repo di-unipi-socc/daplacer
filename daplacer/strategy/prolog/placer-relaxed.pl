@@ -17,7 +17,7 @@ findCompatibles([S | Ss], [(L, S, SCompatibles) | Rest]) :-
 findCompatibles([], []).
 
 lightNodeOK(S, (N, all), HD) :- hardReqs(S, N, HD), softReqs(S, N).
-lightNodeOK(S, (N, hard), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
+lightNodeOK(S, (N, relaxed), HD) :- hardReqs(S, N, HD), \+ softReqs(S, N).
 
 hardReqs(S, N, HD) :-
 	service(S, SWReqs, HWReqs, DataIds, _),
