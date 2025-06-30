@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import time
 from typing import (
     Any,
     Dict,
@@ -24,6 +25,7 @@ from daplacer.metrics import get_metrics
 from daplacer.search_space import (
     NODES,
     SEEDS,
+    search_space,
 )
 from daplacer.strategy import DAPlacerStrategy
 from daplacer.update_policy import get_policies
@@ -50,8 +52,8 @@ def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
                 include_default_callbacks=False,
                 events=get_commits(config["max_ticks"], prolog) + get_metrics(),
                 path=path,
-                log_to_file=True,
-                # log_level="TRACE",
+                # log_to_file=True,
+                log_level="CRITICAL",
             )
 
             app = get_application(
@@ -101,22 +103,22 @@ if __name__ == "__main__":
     generate_infrastructures(nodes=NODES, seeds=SEEDS)
 
     # Example usage of the daplacer_grid function
-    daplacer_grid(config_example, with_ray=False)
+    # daplacer_grid(config_example, with_ray=False)
 
     # Usage with Ray Tune
-    # ray.init(address="auto")
-    # name = input("Experiment name: ")
+    ray.init(address="auto")
+    name = input("Experiment name: ")
 
-    # start_time = time()
-    # run_config = train.RunConfig(name=name, storage_path=(DEFAULT_SIM_PATH).resolve())
-    # tuner = tune.Tuner(daplacer_grid, param_space=search_space, run_config=run_config)
+    start_time = time()
+    run_config = train.RunConfig(name=name, storage_path=(DEFAULT_SIM_PATH).resolve())
+    tuner = tune.Tuner(daplacer_grid, param_space=search_space, run_config=run_config)
 
-    # # tuner = tune.Tuner.restore(
-    # #     "/home/massa/eclypse-sim/edgewise_grid_2025-02-20_15-07-31",
-    # #     trainable=tune.with_resources(edgewise_grid, {"cpu": 2}),
-    # #     param_space=search_space,
-    # #     restart_errored=True,
-    # # )
+    # tuner = tune.Tuner.restore(
+    #     "/home/massa/eclypse-sim/edgewise_grid_2025-02-20_15-07-31",
+    #     trainable=tune.with_resources(edgewise_grid, {"cpu": 2}),
+    #     param_space=search_space,
+    #     restart_errored=True,
+    # )
 
-    # tuner.fit()
-    # print("Elapsed time: ", time() - start_time)
+    tuner.fit()
+    print("Elapsed time: ", time() - start_time)

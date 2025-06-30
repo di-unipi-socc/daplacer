@@ -4,8 +4,8 @@ NODES = [16, 32, 64, 128, 256, 512]
 SEEDS = [3997, 151195, 300425]
 
 search_space = {
-    "timeout": 100,
-    "max_ticks": 60,
+    "timeout": 600,
+    "max_ticks": 600,
     "application_id": "museuMonitor",
     "seed": grid_search(SEEDS),
     "nodes": grid_search(NODES),
