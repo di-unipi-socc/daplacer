@@ -21,7 +21,8 @@ def merge_ray_tune_results(root_dir: str, prefix: str = "daplacer_"):
     ]
     # print(experiment_dirs)
 
-    all_data = []
+    all_app_data = []
+    all_sim_data = []
     tot_processed = 0
     tot_skipped = 0
     total = len(experiment_dirs)
@@ -29,22 +30,26 @@ def merge_ray_tune_results(root_dir: str, prefix: str = "daplacer_"):
         print("Processing experiment:", exp_dir, end="\n")
 
         app_csv_path = exp_dir / "output/csv/application.csv"
+        sim_csv_path = exp_dir / "output/csv/simulation.csv"
         params_path = exp_dir / "params.json"
 
-        if not app_csv_path.exists():
-            print(f"Skipping {exp_dir}: application.csv not found")
+        if not app_csv_path.exists() or not sim_csv_path.exists():
+            print(f"Skipping {exp_dir}: application.csv or simulation.csv not found")
             tot_skipped += 1
-            continue  # Skip if application.csv is missing (experiment not ended)
+            continue  # Skip if csv files are missing (experiment not ended)
 
-        df = pd.read_csv(app_csv_path)
+        df_app = pd.read_csv(app_csv_path)
+        df_sim = pd.read_csv(sim_csv_path)
 
         if params_path.exists():
             with open(params_path, "r", encoding="utf-8") as f:
                 params = dict(json.load(f))
                 for key, value in params.items():
-                    df[key] = value
+                    df_app[key] = value
+                    df_sim[key] = value
 
-        all_data.append(df)
+        all_app_data.append(df_app)
+        all_sim_data.append(df_sim)
         tot_processed += 1
         print(
             f"Processed {tot_processed}/{total}",
@@ -53,19 +58,25 @@ def merge_ray_tune_results(root_dir: str, prefix: str = "daplacer_"):
         )
 
     print(f"Processed: {tot_processed}, Skipped: {tot_skipped}")
-    df = pd.concat(all_data, ignore_index=True)
-    return df
+    df_app = pd.concat(all_app_data, ignore_index=True)
+    df_sim = pd.concat(all_sim_data, ignore_index=True)
+    return df_app, df_sim
 
 
-def clean_and_dump(df: pd.DataFrame, output_file: str = "merged_results.parquet"):
+def clean_and_dump(df_app: pd.DataFrame, df_sim: pd.DataFrame):
 
     # Cast values to correct dtypes
     bool_columns = ["relaxed"]
     for col in bool_columns:
-        df[col] = df[col].astype(bool)
+        df_app[col] = df_app[col].astype(bool)
 
-    df.to_parquet(output_file, index=False)
-    print(f"Successfully saved merged results to {output_file}")
+    df_app.rename(columns={"change_prob": "variation rate"}, inplace=True)
+    df_app.to_parquet("app_results.parquet", index=False)
+    print(f"Application results saved to app_results.parquet")
+
+    df_sim.rename(columns={"change_prob": "variation rate"}, inplace=True)
+    df_sim.to_parquet("sim_results.parquet", index=False)
+    print(f"Simulation results saved to sim_results.parquet")
 
 
 if __name__ == "__main__":
@@ -81,23 +92,17 @@ if __name__ == "__main__":
         help="Root directory containing experiment subdirectories.",
     )
     parser.add_argument(
-        "--output",
-        type=str,
-        default="results.parquet",
-        help="Output Parquet file path.",
-    )
-    parser.add_argument(
         "-p",
         "--prefix",
         type=str,
-        default="edgewise_",
+        default="daplacer_",
         help="Prefix for experiment directories.",
     )
 
     args = parser.parse_args()
 
-    df = merge_ray_tune_results(args.root_dir, args.prefix)
-    if not df.empty:
-        clean_and_dump(df, args.output)
+    df_app, df_sim = merge_ray_tune_results(args.root_dir, args.prefix)
+    if not df_app.empty and not df_sim.empty:
+        clean_and_dump(df_app, df_sim)
     else:
         print(f"No results found in {args.root_dir}")

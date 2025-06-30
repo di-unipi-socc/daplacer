@@ -13,7 +13,7 @@ if TYPE_CHECKING:
         Infrastructure,
     )
     from eclypse.placement import Placement
-    from eclypse.workflow import EclypseEvent
+    from eclypse.workflow.event import EclypseEvent
 
 
 @metric.application
@@ -48,9 +48,34 @@ def is_placed(app: Application, pl: Placement, __: Infrastructure) -> bool:
     return len(pl.mapping) == len(app.nodes)
 
 
+@metric.simulation(activates_on=["enact", "stop"])
+class SuccessRate:
+    """
+    Count the number of successful placements.
+    """
+
+    def __init__(self):
+        self.success_count = 0
+        self.failure_count = 0
+
+    def __call__(self, event: EclypseEvent) -> float:
+        if event.name == "enact":
+            app = event.simulator.applications.get("museuMonitor")
+            pl = event.simulator.placements.get("museuMonitor")
+            if len(pl.mapping) == len(app.nodes):
+                self.success_count += 1
+            else:
+                self.failure_count += 1
+
+        elif event.name == "stop":
+            total = self.success_count + self.failure_count
+            return self.success_count / total if total > 0 else 0.0
+
+
 def get_metrics() -> List[EclypseEvent]:
     return [
         soft_constraints,
         execution_time,
         is_placed,
+        SuccessRate(),
     ]
