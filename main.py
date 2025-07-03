@@ -111,7 +111,11 @@ if __name__ == "__main__":
 
     start_time = time()
     run_config = train.RunConfig(name=name, storage_path=(DEFAULT_SIM_PATH).resolve())
-    tuner = tune.Tuner(daplacer_grid, param_space=search_space, run_config=run_config)
+    tuner = tune.Tuner(
+        tune.with_resources(daplacer_grid, {"cpu": 1.5}),
+        param_space=search_space,
+        run_config=run_config,
+    )
 
     # tuner = tune.Tuner.restore(
     #     "/home/massa/eclypse-sim/edgewise_grid_2025-02-20_15-07-31",
