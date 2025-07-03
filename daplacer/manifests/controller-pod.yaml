@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: controller-pod
+  labels:
+    service: controller
+    software: python,mySQL
+    qos-sec: encryption,auth
+    data: artStats,visitorStats,videoStream
+spec:
+  schedulerName: daplacer-scheduler
+  containers:
+  - name: controller-container
+    image: python:3.10
+    command:
+    - sleep
+    - '3600'
+    resources:
+      requests:
+        cpu: '3'
+        memory: 6Gi
+        ephemeral-storage: 256Gi

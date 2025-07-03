@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dataStorage-pod
+  labels:
+    service: dataStorage
+    software: mySQL,ubuntu
+    qos-sec: encryption,auth
+    data: artStats,visitorStats
+spec:
+  schedulerName: daplacer-scheduler
+  containers:
+  - name: dataStorage-container
+    image: mysql:8.0
+    command:
+    - sleep
+    - '3600'
+    resources:
+      requests:
+        cpu: '5'
+        memory: 4Gi
+        ephemeral-storage: 512Gi

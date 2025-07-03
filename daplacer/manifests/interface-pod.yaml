@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: interface-pod
+  labels:
+    service: interface
+    software: ubuntu
+    qos-sec: encryption,auth
+    data: videoStream
+spec:
+  schedulerName: daplacer-scheduler
+  containers:
+  - name: interface-container
+    image: ubuntu:22.04
+    command:
+    - sleep
+    - '3600'
+    resources:
+      requests:
+        cpu: '2.4'
+        memory: 4Gi
+        ephemeral-storage: 128Gi

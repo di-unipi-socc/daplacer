@@ -16,7 +16,10 @@ from swiplserver import (
 
 ROOT_DIR = Path(__file__).parent
 INFRS_DIR = ROOT_DIR / "infrastructures"
+APPS_DIR = ROOT_DIR / "applications"
+MANIFESTS_DIR = ROOT_DIR / "manifests"
 PL_STRATEGY_DIR = ROOT_DIR / "strategy" / "prolog"
+
 DAP_FILE = PL_STRATEGY_DIR / "daplacer.pl"
 PL_ALL_FILE = PL_STRATEGY_DIR / "placer-all.pl"
 PL_RELAXED_FILE = PL_STRATEGY_DIR / "placer-relaxed.pl"
@@ -25,6 +28,8 @@ RELAXED_BIND = "relaxed"
 APP_NAME = "museuMonitor"
 PL_QUERY = f"dap({APP_NAME}, Placement, Routes, Inferences, Time)"
 
+APP_FILE = APPS_DIR / f"{APP_NAME}.pl"
+INFR_FILE = INFRS_DIR / "{topology}" / "infr{nodes}-{seed}.pl"
 # Application templates
 APPLICATION = "application({app_id}, {service_ids})"
 SERVICE = "service({service_id}, {sw}, ({cpu}, {ram}, {storage}), {data_ids}, {migration_cost})"
