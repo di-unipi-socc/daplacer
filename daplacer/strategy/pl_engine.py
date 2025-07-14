@@ -21,13 +21,13 @@ def pl_process(
 ) -> Tuple[Optional[Dict[str, Any]], int, float]:
 
     start_time = time.time()
+
     r = timed_async_query(
         prolog,
         query=PL_QUERY.format(app=app_name),
         timeout=timeout,
     )
     end_time = time.time() - start_time
-
     mapping = parse_prolog(r["Placement"]) if r else {}
     exec_time = timeout if r is None else end_time if r == False else r["Time"]
     inferences = r["Inferences"] if r else 0
@@ -39,7 +39,7 @@ def pl_process(
         # str_pl = (
         #     "[" + ", ".join(["({}, {})".format(s, n) for s, n in mapping.items()]) + "]"
         # )
-        # print(f"Assert PL mapping: {str_pl}")
+        # print(f"Mapping found: {str_pl}")
     else:
         print("No mapping found, asserting empty placement.")
         timed_query(prolog, query="retractall(deployment(_,_,_,_))")

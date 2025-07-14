@@ -29,17 +29,38 @@ def merge_ray_tune_results(root_dir: str, prefix: str = "daplacer_"):
     for exp_dir in experiment_dirs:
         print("Processing experiment:", exp_dir, end="\n")
 
-        app_csv_path = exp_dir / "output/csv/application.csv"
-        sim_csv_path = exp_dir / "output/csv/simulation.csv"
+        output_dirs = [
+            d for d in exp_dir.iterdir() if d.is_dir() and d.name.startswith("output")
+        ]
+
+        most_recent_output = max(output_dirs, key=lambda d: d.stat().st_mtime)
+
+        if not output_dirs:
+            print(f"  ❌ Nessuna cartella 'output*' trovata in: {exp_dir}")
+            tot_skipped += 1
+            continue
+
+        app_csv_path = most_recent_output / "csv" / "application.csv"
+        sim_csv_path = most_recent_output / "csv" / "simulation.csv"
         params_path = exp_dir / "params.json"
 
         if not app_csv_path.exists() or not sim_csv_path.exists():
             print(f"Skipping {exp_dir}: application.csv or simulation.csv not found")
             tot_skipped += 1
             continue  # Skip if csv files are missing (experiment not ended)
+        try:
+            df_app = pd.read_csv(app_csv_path)
+        except pd.errors.EmptyDataError:
+            print(f"Skipping {exp_dir}: Application CSV is empty")
+            tot_skipped += 1
+            continue
 
-        df_app = pd.read_csv(app_csv_path)
-        df_sim = pd.read_csv(sim_csv_path)
+        try:
+            df_sim = pd.read_csv(sim_csv_path)
+        except pd.errors.EmptyDataError:
+            print(f"Skipping {exp_dir}: Simulation CSV is empty")
+            tot_skipped += 1
+            continue
 
         if params_path.exists():
             with open(params_path, "r", encoding="utf-8") as f:
@@ -71,6 +92,9 @@ def clean_and_dump(df_app: pd.DataFrame, df_sim: pd.DataFrame):
         df_app[col] = df_app[col].astype(bool)
 
     df_app.rename(columns={"change_prob": "variation rate"}, inplace=True)
+    df_app = df_app.astype(
+        {col: str for col in df_app.select_dtypes(include="object").columns}
+    )
     df_app.to_parquet("app_results.parquet", index=False)
     print(f"Application results saved to app_results.parquet")
 

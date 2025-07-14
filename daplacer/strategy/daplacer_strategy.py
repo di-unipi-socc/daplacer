@@ -1,4 +1,5 @@
 from __future__ import annotations
+import re
 
 from typing import (
     TYPE_CHECKING,
@@ -15,6 +16,7 @@ from daplacer.utils import (
     DYNAMICS,
     PL_ALL_FILE,
     PL_RELAXED_FILE,
+    READFILE,
     RETRACT,
     consult,
     timed_query,
@@ -92,6 +94,7 @@ class DAPlacerStrategy(PlacementStrategy):
         self.sync_edges(application)
         mapping = place_bindings(infrastructure, application)
         self.sync_available_infra(infrastructure)
+
         service_mapping, self.exec_time, self.inferences, self.n_relaxed = pl_process(
             self.prolog,
             application.name,
@@ -122,17 +125,48 @@ class DAPlacerStrategy(PlacementStrategy):
             app.add_edge(src, dst, latency=attr["latency"], bandwidth=tot_bw)
 
     def sync_available_infra(self, infr: Infrastructure):
-        timed_query(self.prolog, RETRACT.format("node(_, _, _, _, _)"))
-        for n, nattr in infr.nodes(data=True):
-            pl_str = ASSERT.format(
-                f"node({n}, {nattr['Sw']}, ({nattr['Cpu']}, {nattr['Ram']}, "
-                f"{nattr['Storage']}), {nattr['Sec']}, {nattr['IoT']})"
-            )
-            timed_query(self.prolog, pl_str)
 
-        timed_query(self.prolog, RETRACT.format("link(_, _, _, _)"))
-        for n1, n2, lattr in infr.edges(data=True):
-            pl_str = ASSERT.format(
-                f"link({n1}, {n2}, {lattr['latency']}, {lattr['bandwidth']})"
+        timed_query(self.prolog, RETRACT.format("dataBinding(_,_,_)"))
+        timed_query(self.prolog, RETRACT.format("sensor(_,_,_)"))
+        timed_query(self.prolog, RETRACT.format("actuator(_,_)"))
+        timed_query(self.prolog, RETRACT.format("bwTh(_)"))
+        timed_query(self.prolog, RETRACT.format("nodeUnitCost(_,_,_,_)"))
+        timed_query(self.prolog, RETRACT.format("nodeCI(_,_)"))
+        timed_query(self.prolog, RETRACT.format("link(_,_,_,_)"))
+        timed_query(self.prolog, RETRACT.format("node(_,_,_,_,_)"))
+
+        with open(infr.graph["file"], "r") as f:
+            infra_str = f.read()
+            infr_without_nodes = re.sub(
+                # r"^\s*node\([^\n]*\)\s*\n?",
+                r"^\s*node\([^\n]*\)\s*\.\n",
+                "",
+                infra_str,
+                flags=re.MULTILINE,
             )
-            timed_query(self.prolog, pl_str)
+        infra_without_links = re.sub(
+            r"^\s*link\([^\n]*\)\s*\.\n?",
+            "",
+            infr_without_nodes,
+            flags=re.MULTILINE,
+        )
+        # print(infra_without_links)
+        new_nodes = "\n".join(
+            f"node({n}, {nattr['Sw']}, ({nattr['Cpu']}, {nattr['Ram']}, "
+            f"{nattr['Storage']}), {nattr['Sec']}, {nattr['IoT']})."
+            for n, nattr in infr.nodes(data=True)
+        ).replace("'", "")
+
+        new_links = "\n".join(
+            f"link({n1}, {n2}, {lattr['latency']}, {lattr['bandwidth']})."
+            for n1, n2, lattr in infr.edges(data=True)
+        ).replace("'", "")
+
+        with open(infr.graph["file"], "w") as f:
+            f.write(infra_without_links.rstrip())
+            f.write("\n\n")
+            f.write(new_nodes.strip())
+            f.write("\n\n")
+            f.write(new_links.strip())
+
+        timed_query(self.prolog, READFILE.format(infr.graph["file"]), clean=False)

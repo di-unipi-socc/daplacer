@@ -30,6 +30,7 @@ class ChangeNodePolicy(ChangePolicy):
 
     def __call__(self, nodes: NodeView):
         for n, resources in nodes.data():
+            to_assert = False
             if self.old_resources[n] is None:
                 self.old_resources[n] = resources.copy()
             else:
@@ -37,22 +38,28 @@ class ChangeNodePolicy(ChangePolicy):
             if self.fail():
                 resources["Ram"] = 0
                 resources["Storage"] = 0
+                to_assert = True
             elif rnd.random() < self.change_probability:
                 ram = self.old_resources[n]["Ram"]
                 hdd = self.old_resources[n]["Storage"]
                 resources["Ram"] = round(rnd.uniform(ram * 0.9, ram * 1.1), 2)
                 resources["Storage"] = round(rnd.uniform(hdd * 0.8, hdd * 1.2), 2)
+                to_assert = True
+
+            resources["Assert"] = to_assert
 
 
 class ChangeLinkPolicy(ChangePolicy):
 
     def __call__(self, links: EdgeView):
         for n1, n2, resources in links.data():
+            to_assert = False
             if self.old_resources[(n1, n2)] is None:
                 self.old_resources[(n1, n2)] = resources.copy()
             if self.fail():
                 resources["latency"] = 1000
                 resources["bandwidth"] = 0
+                to_assert = True
             if rnd.random() < self.change_probability:
                 latency = self.old_resources[(n1, n2)]["latency"]
                 bandwidth = self.old_resources[(n1, n2)]["bandwidth"]
@@ -62,6 +69,8 @@ class ChangeLinkPolicy(ChangePolicy):
                 resources["bandwidth"] = round(
                     rnd.uniform(bandwidth * 0.9, bandwidth * 1.1), 2
                 )
+                to_assert = True
+            resources["Assert"] = to_assert
 
 
 def get_policies(seed: int, change_prob: float):

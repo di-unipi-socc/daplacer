@@ -44,9 +44,16 @@ LINK = "link({u}, {v}, {latency}, {bandwidth})"
 ASSERT = "assert({})"
 RETRACT = "retractall({})"
 CONSULT = "consult('{}')"
+READFILE = "readFile('{}')"
 
 DYNAMICS = [
+    "bwTh/1",
+    "dataBinding/3",
+    "sensor/3",
+    "actuator/2",
     "node/5",
+    "nodeUnitCost/4",
+    "nodeCI/2",
     "link/4",
     "service/5",
     "dataType/3",

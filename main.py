@@ -1,9 +1,12 @@
 from pathlib import Path
 from time import time
+import os
 from typing import (
     Any,
     Dict,
 )
+import shutil
+import tempfile
 
 import ray
 from eclypse.simulation import (
@@ -29,11 +32,12 @@ from daplacer.search_space import (
 )
 from daplacer.strategy import DAPlacerStrategy
 from daplacer.update_policy import get_policies
+from daplacer.utils import INFRS_DIR
 
 
 def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
     if with_ray:
-        stg = train.get_context().get_storage()
+        stg = tune.get_context().get_storage()
         path = (
             Path(stg.storage_fs_path)
             / stg.experiment_dir_name
@@ -41,62 +45,73 @@ def daplacer_grid(config: Dict[str, Any], with_ray: bool = True):
             / "output"
         )
     else:
-        path = DEFAULT_SIM_PATH / "daplacer"
+        path = DEFAULT_SIM_PATH / "daplacer-manual"
 
-    with PrologMQI() as mqi:
-        with mqi.create_thread() as prolog:
-            sim_config = SimulationConfig(
-                seed=config["seed"],
-                max_ticks=config["max_ticks"],
-                tick_every_ms="auto",
-                include_default_callbacks=False,
-                events=get_commits(config["max_ticks"], prolog) + get_metrics(),
-                path=path,
-                # log_to_file=True,
-                log_level="CRITICAL",
-            )
+    with tempfile.TemporaryDirectory() as tmpdir:
 
-            app = get_application(
-                application_id=config["application_id"],
-                seed=config["seed"],
-            )
+        topology = config["topology"] if config["topology"] is not None else ""
+        infr_filename = f"infr{config['nodes']}-{config['seed']}.pl"
+        tmp_path = Path(tmpdir) / topology / infr_filename
+        tmp_path.parent.mkdir(parents=True, exist_ok=True)
 
-            node_update_policy, edge_update_policy = get_policies(
-                seed=config["seed"], change_prob=config["change_prob"]
-            )
+        infr_path = INFRS_DIR / topology / infr_filename
+        shutil.copyfile(infr_path, tmp_path)
+        print(tmpdir)
+        with PrologMQI() as mqi:
+            with mqi.create_thread() as prolog:
+                sim_config = SimulationConfig(
+                    seed=config["seed"],
+                    max_ticks=config["max_ticks"],
+                    tick_every_ms="auto",
+                    include_default_callbacks=False,
+                    events=get_commits(config["max_ticks"], prolog) + get_metrics(),
+                    path=path,
+                    # log_to_file=True,
+                    log_level="CRITICAL",
+                )
 
-            infr = get_infrastructure(
-                n=config["nodes"],
-                seed=config["seed"],
-                topology=config["topology"],
-                node_update_policy=node_update_policy,
-                edge_update_policy=edge_update_policy,
-            )
+                app = get_application(
+                    application_id=config["application_id"],
+                    seed=config["seed"],
+                )
 
-            sim = Simulation(infrastructure=infr, simulation_config=sim_config)
-            sim.register(
-                application=app,
-                placement_strategy=DAPlacerStrategy(
-                    prolog=prolog,
-                    timeout=config["timeout"],
-                    relaxed=config["relaxed"],
-                ),
-            )
+                node_update_policy, edge_update_policy = get_policies(
+                    seed=config["seed"], change_prob=config["change_prob"]
+                )
 
-            sim.start()
-            sim.wait()
+                infr = get_infrastructure(
+                    n=config["nodes"],
+                    seed=config["seed"],
+                    topology=config["topology"],
+                    node_update_policy=node_update_policy,
+                    edge_update_policy=edge_update_policy,
+                    file_path=tmp_path,
+                )
+
+                sim = Simulation(infrastructure=infr, simulation_config=sim_config)
+                sim.register(
+                    application=app,
+                    placement_strategy=DAPlacerStrategy(
+                        prolog=prolog,
+                        timeout=config["timeout"],
+                        relaxed=config["relaxed"],
+                    ),
+                )
+
+                sim.start()
+                sim.wait()
 
 
 if __name__ == "__main__":
     config_example = {
         "application_id": "museuMonitor",
-        "nodes": 32,
-        "seed": 3997,
+        "nodes": 16,
+        "seed": 151195,
         "topology": "BA",
         "timeout": 100,
         "max_ticks": 60,
         "change_prob": 0.1,
-        "relaxed": False,
+        "relaxed": True,
     }
 
     # generate all the infrastructures and corresponding Prolog knowledge bases
@@ -106,20 +121,21 @@ if __name__ == "__main__":
     # daplacer_grid(config_example, with_ray=False)
 
     # Usage with Ray Tune
+    os.environ["RAY_memory_monitor_refresh_ms"] = "0"
     ray.init(address="auto")
     name = input("Experiment name: ")
 
     start_time = time()
     run_config = train.RunConfig(name=name, storage_path=(DEFAULT_SIM_PATH).resolve())
     tuner = tune.Tuner(
-        tune.with_resources(daplacer_grid, {"cpu": 1.5}),
+        daplacer_grid,
         param_space=search_space,
         run_config=run_config,
     )
 
     # tuner = tune.Tuner.restore(
-    #     "/home/massa/eclypse-sim/edgewise_grid_2025-02-20_15-07-31",
-    #     trainable=tune.with_resources(edgewise_grid, {"cpu": 2}),
+    #     f"/home/massa/eclypse-sim/{name}",
+    #     trainable=tune.with_resources(daplacer_grid, {"cpu": 32}),
     #     param_space=search_space,
     #     restart_errored=True,
     # )

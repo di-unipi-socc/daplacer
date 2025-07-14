@@ -43,6 +43,7 @@ def get_infrastructure(
     node_assets: Optional[Dict[str, Any]] = None,
     edge_assets: Optional[Dict[str, Any]] = None,
     path_assets_aggregators: Optional[Dict[str, Callable[[List[Any]], Any]]] = None,
+    file_path=None,
 ) -> Infrastructure:
 
     parser = ptn.PrologGraphParser(infra_cfg, handlers=get_handlers())
@@ -59,11 +60,14 @@ def get_infrastructure(
     )
 
     infra.graph["file"] = (
-        Path(__file__).parent
-        / (topology if topology is not None else "")
-        / f"infr{n}-{seed}.pl"
+        (
+            Path(__file__).parent
+            / (topology if topology is not None else "")
+            / f"infr{n}-{seed}.pl"
+        )
+        if file_path is None
+        else Path(file_path)
     )
-
     parser.parse(file_path=infra.graph["file"], graph=infra)
 
     return infra

@@ -53,3 +53,17 @@ sortByMigrationCost(P, SP) :-
   findall((C,on(S,(N,Mode))), (member(on(S,(N,Mode)), P), service(S,_,_,_,C)), Costs),
   sort(1, @>=, Costs, SCosts),
   findall(on(S,(N,Mode)), member((_,on(S,(N,Mode))), SCosts), SP).
+
+readFile(FilePath) :-
+  open(FilePath, read, Stream),
+  repeat,
+      read_line_to_string(Stream, Line),
+      (   Line == end_of_file
+      ->  close(Stream), !
+      ;   (   Line \= "",
+              catch(term_string(Term, Line), _, fail),
+              assertz(Term)
+          ;   true
+          ),
+          fail
+      ).
