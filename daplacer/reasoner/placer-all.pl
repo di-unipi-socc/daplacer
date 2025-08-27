@@ -54,7 +54,7 @@ nodeOK(S, N, P, AllocHW):-
 
 hwOK(HWReqs, HWCaps, N, P, AllocHW) :-
 	findall(HW,  member((N,HW),AllocHW),HWs), sumHW(HWs, CurrAllocHW),
-	findall(HW, (service(S,_,HW,_,_), member(on(S,N), P)), OkHWs), sumHW(OkHWs, NewAllocHW), 
+	findall(HW, (service(S,_,HW,_,_), member(on(S,(N,_)), P)), OkHWs), sumHW(OkHWs, NewAllocHW), 
 	checkHW(HWReqs, HWCaps, CurrAllocHW, NewAllocHW).
 
 sumHW(HWs, AllocHW):- InitAllocHW=(0,0,0), sumHW(HWs, InitAllocHW, AllocHW).

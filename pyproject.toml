@@ -13,6 +13,7 @@ networkx = "^3.5"
 swiplserver = "^1.0.2"
 prolog-to-networkx = { git = "https://github.com/jacopo-massa/prolog-to-networkx" }
 kubernetes = "^33.1.0"
+docker = "^7.1.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

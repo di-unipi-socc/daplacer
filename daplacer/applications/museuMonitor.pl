@@ -7,9 +7,9 @@ dataType(visitorStats, 0.4, [auth, encryption]).
 dataType(videoStream, 2, [auth, encryption]).
 
 % service(ServiceId, [SWReqs], [HWReqs], [DataIds], MigrationCost).
-service(interface, [ubuntu], (2.4, 4, 128), [videoStream], 5).
-service(controller, [python, mySQL], (3, 6, 256), [artStats, visitorStats, videoStream], 30).
-service(dataStorage, [mySQL, ubuntu], (5, 4, 512), [artStats, visitorStats], 100).
+service(interface, [ubuntu], (2, 0.5, 20), [videoStream], 5).
+service(controller, [python, mySQL], (2, 0.5, 10), [artStats, visitorStats, videoStream], 30).
+service(dataStorage, [mySQL, ubuntu], (2, 0.5, 25), [artStats, visitorStats], 100).
 
 serviceCost(interface, 0.2).
 serviceCost(controller, 0.5).

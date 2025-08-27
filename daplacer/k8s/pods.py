@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from typing import (
     TYPE_CHECKING,
     Tuple,
@@ -7,17 +8,18 @@ from typing import (
 
 import kubernetes as k8s
 import yaml
-from swiplserver import PrologMQI
 
 from daplacer.utils import (
     APP_FILE,
     APP_NAME,
     APPLICATION,
-    CONSULT,
+    CONTAINER_NAME,
     DATA_TYPE,
-    INFR_FILE,
     MANIFESTS_DIR,
+    POD_NAME,
+    SCHEDULER_NAME,
     SERVICE,
+    consult,
     timed_query,
 )
 
@@ -25,7 +27,7 @@ if TYPE_CHECKING:
     from swiplserver import PrologThread
 
 
-def infer_image(swreqs):
+def infer_image(swreqs: list[str]) -> str:
     swreqs = [s.lower() for s in swreqs]
     if "python" in swreqs and "mysql" in swreqs:
         return "python:3.10"
@@ -35,7 +37,7 @@ def infer_image(swreqs):
         return "python:3.10"
     if "ubuntu" in swreqs:
         return "ubuntu:22.04"
-    return "alpine:latest"  # fallback
+    return "alpine:latest"
 
 
 def parse_hw(hw_tuple: Tuple[int, int, int]) -> Tuple[str, str, str]:
@@ -43,7 +45,10 @@ def parse_hw(hw_tuple: Tuple[int, int, int]) -> Tuple[str, str, str]:
     return str(cpu_cores), f"{ram_gb}Gi", f"{storage_gb}Gi"
 
 
-def parse_requirements(service_id: str, prolog: PrologThread):
+def parse_requirements(
+    prolog: PrologThread,
+    service_id: str,
+) -> Tuple[list[str], list[str]]:
     data_query = SERVICE.format(
         service_id=service_id,
         sw="_",
@@ -53,108 +58,151 @@ def parse_requirements(service_id: str, prolog: PrologThread):
         data_ids="DataIds",
         migration_cost="_",
     )
-    data_ids = timed_query(prolog=prolog, query=data_query)[0]["DataIds"]
+    data_ids = timed_query(prolog, query=data_query)[0]["DataIds"]
 
     sec_reqs = set()
     for d in data_ids:
-        data_type_query = DATA_TYPE.format(data_id=d, size="_", sec_reqs="Secs")
-        result = timed_query(prolog=prolog, query=data_type_query)[0]["Secs"]
+        sec_query = DATA_TYPE.format(data_id=d, size="_", sec_reqs="Secs")
+        result = timed_query(prolog, query=sec_query)[0]["Secs"]
         sec_reqs.update(result)
+
     return data_ids, list(sec_reqs)
 
 
-def build_pod_yaml(service_id, swreqs, hwreqs, data_ids, sec_reqs):
+def build_deployment_yaml(
+    service_id: str,
+    swreqs: list[str],
+    hwreqs: Tuple[int, int, int],
+    data_ids: list[str],
+    sec_reqs: list[str],
+) -> dict:
     cpu, memory, storage = parse_hw(hwreqs)
     image = infer_image(swreqs)
+    sid = service_id.lower()
 
     labels = {
+        "app": sid,
         "service": service_id,
-        "software": ",".join(swreqs),
-        "qos-sec": ",".join(sec_reqs),
-        "data": ",".join(data_ids),
     }
 
-    pod = {
-        "apiVersion": "v1",
-        "kind": "Pod",
-        "metadata": {"name": f"{service_id}-pod", "labels": labels},
+    for sw in swreqs:
+        labels[f"sw.{sw}"] = "true"
+    for sec in sec_reqs:
+        labels[f"qos.{sec}"] = "true"
+    for data in data_ids:
+        labels[f"data.{data}"] = "true"
+
+    deployment = {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+            "name": POD_NAME.format(sid),
+            "labels": labels,
+        },
         "spec": {
-            "schedulerName": "daplacer-scheduler",
-            "containers": [
-                {
-                    "name": f"{service_id}-container",
-                    "image": image,
-                    "command": ["sleep", "3600"],
-                    "resources": {
-                        "requests": {
-                            "cpu": cpu,
-                            "memory": memory,
-                            "ephemeral-storage": storage,
+            "replicas": 1,
+            "selector": {"matchLabels": {"app": sid}},
+            "template": {
+                "metadata": {"labels": labels},
+                "spec": {
+                    "schedulerName": SCHEDULER_NAME,
+                    "containers": [
+                        {
+                            "name": CONTAINER_NAME.format(sid),
+                            "image": image,
+                            "command": ["sleep", "3600"],
+                            "resources": {
+                                "requests": {
+                                    "cpu": cpu,
+                                    "memory": memory,
+                                    "ephemeral-storage": storage,
+                                }
+                            },
                         }
-                    },
-                }
-            ],
+                    ],
+                },
+            },
         },
     }
 
-    return pod
+    return deployment
 
 
-def apply_pod(pod_yaml):
-    """Applica un pod al cluster"""
+def apply_deployment(dep_yaml: dict):
     k8s.config.load_kube_config()
-    v1 = k8s.client.CoreV1Api()
+    v1 = k8s.client.AppsV1Api()
+
+    dep_name = dep_yaml["metadata"]["name"]
+    namespace = dep_yaml["metadata"].get("namespace", "default")
+
     try:
-        v1.create_namespaced_pod(namespace="default", body=pod_yaml)
-        print(f"Created pod {pod_yaml['metadata']['name']}")
+        v1.read_namespaced_deployment(name=dep_name, namespace=namespace)
+        print(f"'{dep_name}' already exists. Deleting...")
+
+        v1.delete_namespaced_deployment(name=dep_name, namespace=namespace)
+
+        for _ in range(30):
+            time.sleep(0.5)
+            try:
+                v1.read_namespaced_deployment(name=dep_name, namespace=namespace)
+            except k8s.client.exceptions.ApiException as e:
+                if e.status == 404:
+                    break
+        else:
+            print(f"Warning: Timeout waiting for deployment {dep_name} deletion.")
+
     except k8s.client.exceptions.ApiException as e:
-        print(f"❌ Error creating pod {pod_yaml['metadata']['name']}: {e}")
+        if e.status != 404:
+            print(f"Error checking deployment {dep_name}: {e}")
+            return
+
+    try:
+        v1.create_namespaced_deployment(namespace=namespace, body=dep_yaml)
+        print(f"Created deployment {dep_name}")
+    except k8s.client.exceptions.ApiException as e:
+        print(f"Error creating deployment {dep_name}: {e}")
 
 
-def write_pod(pod_yaml):
+def write_manifest(dep_yaml: dict):
     MANIFESTS_DIR.mkdir(parents=True, exist_ok=True)
-    filename = MANIFESTS_DIR / f"{pod_yaml['metadata']['name']}.yaml"
+    filename = MANIFESTS_DIR / f"{dep_yaml['metadata']['name']}.yaml"
     with open(filename, "w") as f:
-        yaml.dump(pod_yaml, f, sort_keys=False)
-        print(f"Pod {pod_yaml['metadata']['name']} saved to {filename}")
+        yaml.dump(dep_yaml, f, sort_keys=False)
+        print(f"Deployment {dep_yaml['metadata']['name']} saved to {filename}")
 
 
-def generate_pods(apply: bool = False):
-    with PrologMQI() as mqi:
-        with mqi.create_thread() as prolog:
-            timed_query(prolog=prolog, query=CONSULT.format(APP_FILE), clean=False)
-            print(APP_FILE)
+def generate_pods(prolog: PrologThread, apply: bool = False):
+    consult(prolog, APP_FILE)
 
-            r = timed_query(
-                prolog=prolog,
-                query=APPLICATION.format(app_id=APP_NAME, service_ids="Services"),
-            )
-            if not r:
-                raise ValueError(
-                    f"Application '{APP_NAME}' not found in knowledge base."
-                )
+    result = timed_query(
+        prolog=prolog,
+        query=APPLICATION.format(app_id=APP_NAME, service_ids="Services"),
+    )
 
-            services = r[0]["Services"]
-            for service_id in services:
-                q = SERVICE.format(
-                    service_id=service_id,
-                    sw="SW",
-                    cpu="CPU",
-                    ram="RAM",
-                    storage="Storage",
-                    data_ids="_",
-                    migration_cost="_",
-                )
-                res = list(prolog.query(q))[0]
-                swreqs = res["SW"]
-                hwreqs = (res["CPU"], res["RAM"], res["Storage"])
+    if not result:
+        raise ValueError(f"Application '{APP_NAME}' not found in knowledge base.")
 
-                data_ids, sec_reqs = parse_requirements(service_id, prolog)
+    services = result[0]["Services"]
 
-                pod_yaml = build_pod_yaml(
-                    service_id, swreqs, hwreqs, data_ids, sec_reqs
-                )
-                if apply:
-                    apply_pod(pod_yaml)
-                else:
-                    write_pod(pod_yaml)
+    for service_id in services:
+        query = SERVICE.format(
+            service_id=service_id,
+            sw="SW",
+            cpu="CPU",
+            ram="RAM",
+            storage="Storage",
+            data_ids="_",
+            migration_cost="_",
+        )
+        res = timed_query(prolog, query)[0]
+        swreqs = res["SW"]
+        hwreqs = (res["CPU"], res["RAM"], res["Storage"])
+
+        data_ids, sec_reqs = parse_requirements(prolog, service_id)
+
+        dep_yaml = build_deployment_yaml(service_id, swreqs, hwreqs, data_ids, sec_reqs)
+
+        if apply:
+            apply_deployment(dep_yaml)
+        else:
+            write_manifest(dep_yaml)
